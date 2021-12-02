@@ -47,32 +47,36 @@ struct chooseQuiz: View {
                             
                             Spacer()
                         
-                        HStack{
-                            Text("Premium:")
-                                .foregroundColor(.white)
-                                .padding(.leading)
-                                .font(.title)
-                            Image(systemName: bildbild)
-                                .font(.title)
-                                .foregroundColor(.yellow)
-                            Spacer()
-                            Button(action: {
-                                bildbild = "star.fill"
-                                
-                            }) {
-                                Text("Bli Premium")
-                                    .foregroundColor(.black)
-                                    .frame(width: 100, height: 40)
-                                    .background(.mint)
-                                    .padding(.horizontal)
-                                    
-                                    
-                            }
-                        }
+                        /*
+                         HStack{
+                             Text("Premium:")
+                                 .foregroundColor(.white)
+                                 .padding(.leading)
+                                 .font(.title)
+                             Image(systemName: bildbild)
+                                 .font(.title)
+                                 .foregroundColor(.yellow)
+                             Spacer()
+                             Button(action: {
+                                 bildbild = "star.fill"
+                                 
+                             }) {
+                                 Text("Bli Premium")
+                                     .foregroundColor(.black)
+                                     .frame(width: 100, height: 40)
+                                     .background(.mint)
+                                     .padding(.horizontal)
+                                     
+                                     
+                             }
+                         }
+                         */
                         
                         
                         
                         Spacer()
+                        
+                        VStack{
                         
                         
                         NavigationLink(destination: EuropeQuiz())
@@ -83,64 +87,86 @@ struct chooseQuiz: View {
                                     .fontWeight(.semibold)
                                     .padding(.all)
                                     .foregroundColor(.white)
-                                    .frame(width: 280, height: 60)
+                                    .frame(width: 300, height: 70)
                                     .background(Color("MyBlue"))
-                                    .cornerRadius(10)
-                                    .border(Color.black, width: 2)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                    .cornerRadius(30)
+                                    .padding(.bottom, 10.0)
+                                    
+                                    
                             
                         }
                         
-                        .padding()
+                        
                         
                         NavigationLink(destination: AsiaQuiz()) {Text(AS)
                                     .font(.largeTitle)
                                     .fontWeight(.semibold)
                                     .padding(.all)
                                     .foregroundColor(.white)
-                                    .frame(width: 280, height: 60)
+                                    .frame(width: 300, height: 70)
                                     .background(Color("MyBlue"))
-                                    .cornerRadius(10)
-                                    .border(Color.black, width: 2)
-                                    
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                    .cornerRadius(30)
+                                    .padding(.bottom, 10.0)
                         }
-                        .padding()
+                        
                         
                         NavigationLink(destination: AfricaQuiz()) {Text(AF)
                                     .font(.largeTitle)
                                     .fontWeight(.semibold)
                                     .padding(.all)
                                     .foregroundColor(.white)
-                                    .frame(width: 280, height: 60)
+                                    .frame(width: 300, height: 70)
                                     .background(Color("MyBlue"))
-                                    .cornerRadius(10)
-                                    .border(Color.black, width: 2)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                    .cornerRadius(30)
+                                    .padding(.bottom, 10.0)
                         }
-                        .padding()
+                        
                         
                         NavigationLink(destination: AmericaQuiz()) {Text(AM)
                                     .font(.largeTitle)
                                     .fontWeight(.semibold)
                                     .padding(.all)
                                     .foregroundColor(.white)
-                                    .frame(width: 280, height: 60)
+                                    .frame(width: 300, height: 70)
                                     .background(Color("MyBlue"))
-                                    .cornerRadius(10)
-                                    .border(Color.black, width: 2)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                    .cornerRadius(30)
+                                    .padding(.bottom, 10.0)
                                     
                         }
-                        .padding()
+                        
                         
                         NavigationLink(destination: AllQuiz()) {Text(VN)
                                     .font(.largeTitle)
                                     .fontWeight(.semibold)
                                     .padding(.all)
                                     .foregroundColor(.white)
-                                    .frame(width: 280, height: 60)
+                                    .frame(width: 300, height: 70)
                                     .background(Color("MyBlue"))
-                                    .cornerRadius(10)
-                                    .border(Color.black, width: 2)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                    .cornerRadius(30)
+                                    .padding(.bottom, 10.0)
                         }
-                        .padding()
+                        
+                        }
                         
                         Spacer()
                         

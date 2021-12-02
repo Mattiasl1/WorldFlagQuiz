@@ -23,7 +23,7 @@ struct AfricaScore: View {
                     .font(.title)
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .shadow(radius: 10)
+                    .shadow(color: .black, radius: 13, x: 0, y: 0)
                 Spacer()
                 //gamescoreEU
                 
@@ -31,7 +31,7 @@ struct AfricaScore: View {
                     .font(.system(size: 120))
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .shadow(radius: 10)
+                    .shadow(color: .yellow, radius: 13, x: 0, y: 0)
                 
                 
                 Spacer()
@@ -39,8 +39,8 @@ struct AfricaScore: View {
                     .font(.system(size: 80))
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .underline()
-                    .shadow(radius: 10)
+                    .underline(true, color: .yellow)
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
                 Spacer()
             }
             

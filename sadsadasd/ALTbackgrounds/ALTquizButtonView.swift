@@ -42,7 +42,7 @@ struct ALTquizButtonView: View {
     
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.black, .red, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
         VStack {
             VStack{

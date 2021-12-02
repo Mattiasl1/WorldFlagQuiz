@@ -18,7 +18,7 @@ struct EuropeImageQuiz: View {
         Image(imageName)
             .renderingMode(.original)
             .resizable()
-            .frame(width: 250, height: 180)
+            .frame(width: 320, height: 200)
         
     }
 }
@@ -129,11 +129,16 @@ struct EuropeQuiz: View {
                             .font(.largeTitle)
                             .fontWeight(.semibold)
                             .foregroundColor(.white)
-                            .frame(width: 300, height: 50)
+                            .frame(width: 350, height: 70)
                             .background(Color("MyBlue"))
                             .cornerRadius(10)
-                            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 3)
-                            .padding(.bottom, 30)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Color.black, lineWidth: 5)
+                            )
+                            .cornerRadius(30)
+                            .padding(.bottom, 10.0)
+                            
                         
                         
                         
@@ -184,9 +189,10 @@ struct EuropeQuiz: View {
             showCorrect = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                timeRemaining = 15
+                
                 showCorrect = false
                 self.askQuestion()
+                timeRemaining = 15
             }
             
             

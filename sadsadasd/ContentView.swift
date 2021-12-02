@@ -10,7 +10,7 @@ import AVFoundation
 
 struct ContentView: View {
     
-    
+    @State var onClick = false
     @State var countryList = "LÄNDER"
     @State var letsPlay = "SPELA"
     @State var highScore = "TOPPLISTA"
@@ -18,9 +18,10 @@ struct ContentView: View {
     @State var highScoreEng = "HIGHSCORE"
     
     var body: some View {
-        
-        VStack {
-            NavigationView{
+        NavigationView{
+            
+            VStack {
+                
                 
                 ZStack{
                     Color(.white)
@@ -63,61 +64,92 @@ struct ContentView: View {
                             
                             
                         }
+                        .padding()
                         
                         
                         globestart()
-                            .background(.black)
-                            .padding(.all)
+                            .background(.white)
+                            .padding(.bottom, 100.0)
                         
                         
                         Spacer()
+                        
                         Spacer()
                         
                         
-                        
-                        
-                        NavigationLink(destination: chooseQuiz())
-                        {
+                        VStack{
+                            
+                            NavigationLink(destination: chooseQuiz())
+                            {
+                                
+                                
+                                Text(letsPlay)
+                                    .font(.largeTitle)
+                                    .fontWeight(.semibold)
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .frame(width: 300, height: 70)
+                                    .background(Color("MyBlue"))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                    .cornerRadius(30)
+                                    .padding(.bottom, 10.0)
+                                
+                                
+                            }
+                            
+                            /*
+                             Button(action: {
+                             onClick = true
+                             }) {
+                             Text(countryList)
+                             .font(.largeTitle)
+                             .fontWeight(.semibold)
+                             .padding()
+                             .foregroundColor(.white)
+                             .frame(width: 300, height: 70)
+                             .background(Color("MyBlue"))
+                             .overlay(
+                             RoundedRectangle(cornerRadius: 30)
+                             .stroke(Color.black, lineWidth: 5)
+                             )
+                             .cornerRadius(30)
+                             }.fullScreenCover(isPresented: $onClick) {
+                             CountryListView()
+                             }
+                             */
                             
                             
-                            Text(letsPlay)
-                                .font(.largeTitle)
-                                .fontWeight(.semibold)
-                                .padding(.all)
-                                .foregroundColor(.white)
-                                .frame(width: 300, height: 60)
-                                .background(Color("MyBlue"))
-                                .cornerRadius(10)
-                                .border(Color.black, width: 2)
+                            
+                            
+                            NavigationLink(destination: LeaderBoardView())
+                            {
+                                
+                                
+                                Text(highScore)
+                                    .font(.largeTitle)
+                                    .fontWeight(.semibold)
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .frame(width: 300, height: 70)
+                                    .background(Color("MyBlue"))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 30)
+                                            .stroke(Color.black, lineWidth: 5)
+                                    )
+                                    .cornerRadius(30)
+                                    .padding(.bottom, 10.0)
+                                
+                                
+                            }
+                            
+                            
+                            Spacer()
                             
                             
                         }
-                        
-                        
-                        
-                        Spacer()
-                        
-                        
-                        NavigationLink(destination: LeaderBoardView())
-                        {
-                            
-                            
-                            Text(highScore)
-                                .font(.largeTitle)
-                                .fontWeight(.semibold)
-                                .padding(.all)
-                                .foregroundColor(.white)
-                                .frame(width: 300, height: 60)
-                                .background(Color("MyBlue"))
-                                .cornerRadius(10)
-                                .border(Color.black, width: 2)
-                            
-                            
-                        }
-                        
-                        
-                        Spacer()
-                        
                         NavigationLink(destination: CountryListView())
                         {
                             
@@ -125,26 +157,31 @@ struct ContentView: View {
                             Text(countryList)
                                 .font(.largeTitle)
                                 .fontWeight(.semibold)
-                                .padding(.all)
+                                .padding()
                                 .foregroundColor(.white)
-                                .frame(width: 300, height: 60)
+                                .frame(width: 300, height: 70)
                                 .background(Color("MyBlue"))
-                                .cornerRadius(10)
-                                .border(Color.black, width: 2)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Color.black, lineWidth: 5)
+                                )
+                                .cornerRadius(30)
+                                .padding(.bottom, 10.0)
                             
                             
                         }
                         
-                        
                         Spacer()
                         
+                      
                         
                     }
                     
                     
                 }
+                
+               Spacer()
             }
-            
             
         }.onAppear(perform: {
             
@@ -184,3 +221,46 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
+/*
+ NavigationLink(destination: CountryListView())
+ {
+ 
+ 
+ Text(countryList)
+ .font(.largeTitle)
+ .fontWeight(.semibold)
+ .padding()
+ .foregroundColor(.white)
+ .frame(width: 300, height: 70)
+ .background(Color("MyBlue"))
+ .overlay(
+ RoundedRectangle(cornerRadius: 30)
+ .stroke(Color.black, lineWidth: 5)
+ )
+ .cornerRadius(30)
+ 
+ 
+ }
+ */
+
+
+/*
+ Button(action: {
+ onClick = true
+ }) {
+ Text(countryList)
+ .font(.largeTitle)
+ .fontWeight(.semibold)
+ .padding()
+ .foregroundColor(.white)
+ .frame(width: 300, height: 70)
+ .background(Color("MyBlue"))
+ .overlay(
+ RoundedRectangle(cornerRadius: 30)
+ .stroke(Color.black, lineWidth: 5)
+ )
+ .cornerRadius(30)
+ }.fullScreenCover(isPresented: $onClick) {
+ CountryListView()
+ }
+ */

@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		87190B73274D3D40007770CC /* ChooseQuizALT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190B72274D3D40007770CC /* ChooseQuizALT.swift */; };
-		87190B76274D3DD8007770CC /* ALTeuropeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190B75274D3DD8007770CC /* ALTeuropeView.swift */; };
-		87190B78274D3DE8007770CC /* AltasiaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190B77274D3DE8007770CC /* AltasiaView.swift */; };
-		87190B7A274D404D007770CC /* ALTamericaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190B79274D404D007770CC /* ALTamericaView.swift */; };
-		87190B7C274D405D007770CC /* ALTallquizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190B7B274D405D007770CC /* ALTallquizView.swift */; };
-		87190B7E274D4211007770CC /* ALTafricaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190B7D274D4211007770CC /* ALTafricaView.swift */; };
 		87190BA0274F86E1007770CC /* testquizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190B9F274F86E1007770CC /* testquizView.swift */; };
 		87190BA3274F8D04007770CC /* ALTbackGone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190BA2274F8D04007770CC /* ALTbackGone.swift */; };
 		87190BA5274F8D51007770CC /* ALTbackGtwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190BA4274F8D51007770CC /* ALTbackGtwo.swift */; };
@@ -48,12 +42,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		87190B72274D3D40007770CC /* ChooseQuizALT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseQuizALT.swift; sourceTree = "<group>"; };
-		87190B75274D3DD8007770CC /* ALTeuropeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTeuropeView.swift; sourceTree = "<group>"; };
-		87190B77274D3DE8007770CC /* AltasiaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltasiaView.swift; sourceTree = "<group>"; };
-		87190B79274D404D007770CC /* ALTamericaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTamericaView.swift; sourceTree = "<group>"; };
-		87190B7B274D405D007770CC /* ALTallquizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTallquizView.swift; sourceTree = "<group>"; };
-		87190B7D274D4211007770CC /* ALTafricaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTafricaView.swift; sourceTree = "<group>"; };
 		87190B9F274F86E1007770CC /* testquizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testquizView.swift; sourceTree = "<group>"; };
 		87190BA2274F8D04007770CC /* ALTbackGone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTbackGone.swift; sourceTree = "<group>"; };
 		87190BA4274F8D51007770CC /* ALTbackGtwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTbackGtwo.swift; sourceTree = "<group>"; };
@@ -100,25 +88,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		87190B74274D3D97007770CC /* ALTchoosequizView */ = {
-			isa = PBXGroup;
-			children = (
-				87190B72274D3D40007770CC /* ChooseQuizALT.swift */,
-				87190B75274D3DD8007770CC /* ALTeuropeView.swift */,
-				87190B77274D3DE8007770CC /* AltasiaView.swift */,
-				87190B7D274D4211007770CC /* ALTafricaView.swift */,
-				87190B79274D404D007770CC /* ALTamericaView.swift */,
-				87190B7B274D405D007770CC /* ALTallquizView.swift */,
-			);
-			path = ALTchoosequizView;
-			sourceTree = "<group>";
-		};
 		87190BA1274F8CDD007770CC /* ALTbackgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				87190BA2274F8D04007770CC /* ALTbackGone.swift */,
 				87190B9F274F86E1007770CC /* testquizView.swift */,
 				8757FCDC2746EFC5005287F1 /* BackgroundColor.swift */,
-				87190BA2274F8D04007770CC /* ALTbackGone.swift */,
 				87190BA4274F8D51007770CC /* ALTbackGtwo.swift */,
 				87E4BAD02754D0F3003C48C8 /* ALTchooseviewButton.swift */,
 				87E4BAD22754D10B003C48C8 /* ALTquizButtonView.swift */,
@@ -179,7 +154,6 @@
 				87E4BAD42754D7A0003C48C8 /* CountryListView.swift */,
 				87E4BAD82754EDB3003C48C8 /* LeaderBoardViews */,
 				87190BA1274F8CDD007770CC /* ALTbackgrounds */,
-				87190B74274D3D97007770CC /* ALTchoosequizView */,
 				8757FCDB274689B5005287F1 /* Quiz */,
 				8762969F274FBC9B005BDB7B /* grupp */,
 				87AF8AF22742802C0021321D /* Assets.xcassets */,
@@ -299,9 +273,7 @@
 				8757FCDA274689A8005287F1 /* AllQuiz.swift in Sources */,
 				87E8CE0F2745385600EDB61D /* EuropeQuiz.swift in Sources */,
 				87E4BADE2754EEBE003C48C8 /* AfricaScore.swift in Sources */,
-				87190B7A274D404D007770CC /* ALTamericaView.swift in Sources */,
 				87190BA5274F8D51007770CC /* ALTbackGtwo.swift in Sources */,
-				87190B7C274D405D007770CC /* ALTallquizView.swift in Sources */,
 				8757FCD82746899E005287F1 /* AmericaQuiz.swift in Sources */,
 				87E4BAE02754EECA003C48C8 /* AmericaScore.swift in Sources */,
 				87E4BAD12754D0F3003C48C8 /* ALTchooseviewButton.swift in Sources */,
@@ -309,19 +281,15 @@
 				87190BA3274F8D04007770CC /* ALTbackGone.swift in Sources */,
 				87AF8AFF274282DC0021321D /* AnswerButton.swift in Sources */,
 				87E4BADC2754EEB6003C48C8 /* AsiaScore.swift in Sources */,
-				87190B76274D3DD8007770CC /* ALTeuropeView.swift in Sources */,
 				876296A1275401F0005BDB7B /* chooseQuizENG.swift in Sources */,
 				87E8CD8F2743BC0C00EDB61D /* timerview.swift in Sources */,
 				87190BA0274F86E1007770CC /* testquizView.swift in Sources */,
-				87190B7E274D4211007770CC /* ALTafricaView.swift in Sources */,
 				87E8CD8B2743AAAD00EDB61D /* QuizView.swift in Sources */,
 				87E8CE112746406A00EDB61D /* Timer2.swift in Sources */,
 				8757FCDD2746EFC5005287F1 /* BackgroundColor.swift in Sources */,
-				87190B78274D3DE8007770CC /* AltasiaView.swift in Sources */,
 				8757FCD427467901005287F1 /* AsiaQuiz.swift in Sources */,
 				8757FCD62746898F005287F1 /* AfricaQuiz.swift in Sources */,
 				87E4BAD52754D7A0003C48C8 /* CountryListView.swift in Sources */,
-				87190B73274D3D40007770CC /* ChooseQuizALT.swift in Sources */,
 				87E8CD8D2743AB6200EDB61D /* Flags.swift in Sources */,
 				87E4BADA2754EDDD003C48C8 /* EuropeScore.swift in Sources */,
 				87E8CE0D2745246300EDB61D /* chooseQuiz.swift in Sources */,

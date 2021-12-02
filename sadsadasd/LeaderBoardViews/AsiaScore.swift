@@ -24,6 +24,7 @@ struct AsiaScore: View {
                     .fontWeight(.black)
                     .foregroundColor(.white)
                     .shadow(radius: 10)
+                    .shadow(color: .black, radius: 13, x: 0, y: 0)
                 Spacer()
                 //gamescoreEU
                 
@@ -31,7 +32,7 @@ struct AsiaScore: View {
                     .font(.system(size: 120))
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .shadow(radius: 10)
+                    .shadow(color: .orange, radius: 13, x: 0, y: 0)
 
                 
                 
@@ -40,8 +41,8 @@ struct AsiaScore: View {
                     .font(.system(size: 80))
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .underline()
-                    .shadow(radius: 10)
+                    .underline(true, color: .orange)
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
                 Spacer()
             }
         }

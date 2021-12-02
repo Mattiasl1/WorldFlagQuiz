@@ -30,6 +30,7 @@ struct EuropeScore: View {
                     .fontWeight(.black)
                     .foregroundColor(.white)
                     .shadow(radius: 10)
+                    .shadow(color: .black, radius: 13, x: 0, y: 0)
                 Spacer()
                 //gamescoreEU
                 
@@ -38,6 +39,7 @@ struct EuropeScore: View {
                     .fontWeight(.black)
                     .foregroundColor(.white)
                     .shadow(radius: 10)
+                    .shadow(color: .green, radius: 13, x: 0, y: 0)
                 
                 
                 Spacer()
@@ -45,8 +47,10 @@ struct EuropeScore: View {
                     .font(.system(size: 80))
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .underline()
-                    .shadow(radius: 10)
+                    .underline(true, color: .green)
+                    
+                    
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
                     
                 
                 Spacer()

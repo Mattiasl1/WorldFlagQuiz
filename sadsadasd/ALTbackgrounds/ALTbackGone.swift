@@ -12,7 +12,7 @@ struct ALTbackGone: View {
     var body: some View {
         ZStack{
             ZStack{
-                LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(gradient: Gradient(colors: [.black, .red, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
                     
                     
@@ -37,7 +37,7 @@ struct ALTbackGone: View {
                                     .padding(.all)
                                     .foregroundColor(.black)
                                     .frame(width: 280, height: 60)
-                                    .background(.orange)
+                                    .background(.white)
                                     .cornerRadius(10)
                                     .border(Color.black, width: 2)
                             
@@ -51,7 +51,7 @@ struct ALTbackGone: View {
                                     .padding(.all)
                                     .foregroundColor(.black)
                                     .frame(width: 280, height: 60)
-                                    .background(.orange)
+                                    .background(.white)
                                     .cornerRadius(10)
                                     .border(Color.black, width: 2)
                                     
@@ -64,7 +64,7 @@ struct ALTbackGone: View {
                                     .padding(.all)
                                     .foregroundColor(.black)
                                     .frame(width: 280, height: 60)
-                                    .background(.orange)
+                                    .background(.white)
                                     .cornerRadius(10)
                                     .border(Color.black, width: 2)
                         }
@@ -76,7 +76,7 @@ struct ALTbackGone: View {
                                     .padding(.all)
                                     .foregroundColor(.black)
                                     .frame(width: 280, height: 60)
-                                    .background(.orange)
+                                    .background(.white)
                                     .cornerRadius(10)
                                     .border(Color.black, width: 2)
                                     
@@ -89,7 +89,7 @@ struct ALTbackGone: View {
                                     .padding(.all)
                                     .foregroundColor(.black)
                                     .frame(width: 280, height: 60)
-                                    .background(.orange)
+                                    .background(.white)
                                     .cornerRadius(10)
                                     .border(Color.black, width: 2)
                         }

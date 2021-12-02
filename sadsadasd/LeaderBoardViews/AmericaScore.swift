@@ -24,7 +24,7 @@ struct AmericaScore: View {
                     .font(.title)
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .shadow(radius: 10)
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
                 Spacer()
                 
                 
@@ -32,15 +32,15 @@ struct AmericaScore: View {
                     .font(.system(size: 120))
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .shadow(radius: 10)
+                    .shadow(color: .red, radius: 4, x: 0, y: 0)
                 
                 Spacer()
                 Text("AMERIKA")
                     .font(.system(size: 80))
                     .fontWeight(.black)
                     .foregroundColor(.white)
-                    .underline()
-                    .shadow(radius: 10)
+                    .underline(true, color: .red)
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
                 Spacer()
             }
             
