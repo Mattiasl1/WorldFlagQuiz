@@ -11,7 +11,16 @@ import SwiftUI
 struct sadsadasdApp: App {
     var body: some Scene {
         WindowGroup {
+            //timerview()
+            //ALTchooseviewButton()
             ContentView()
+           // BackgroundColor()
+            //QuizView()
+            //AsiaQuiz()
+            //ChooseQuizALT() //Alternativ välja quiz meny
+            //ALTbackGtwo()
+             //ALTbackGone()
+            
         }
     }
 }

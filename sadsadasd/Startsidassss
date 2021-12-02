@@ -1,0 +1,73 @@
+//
+//  ContentView.swift
+//  sadsadasd
+//
+//  Created by Mattias Liljenberg on 2021-11-15.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        
+        
+        ZStack{
+            Color(.white)
+                .ignoresSafeArea()
+            
+        VStack {
+            Spacer()
+            
+            globestart()
+                .background(.black)
+                .padding(.all)
+            
+            Spacer()
+            
+            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                
+                Text("START")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .padding(.all)
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 60)
+                    .background(.gray)
+                    .cornerRadius(10)
+                
+                
+       
+                    
+                }
+            
+            
+                Spacer()
+            
+                
+            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/) {
+                
+                Text("LEADERBOARD")
+                    .font(.largeTitle)
+                    .fontWeight(.semibold)
+                    .padding(.all)
+                    .foregroundColor(.white)
+                    .frame(width: 300, height: 60)
+                    .background(.gray)
+                    .cornerRadius(10)
+      
+                }
+            Spacer()
+            
+            
+        }
+        
+        
+        }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
