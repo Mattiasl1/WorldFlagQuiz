@@ -29,6 +29,10 @@ struct AmericaQuiz: View {
     
     @State private var TimeToStart = 3
     let Starttimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State private var RoundTimer = 32
+    let RoundtimerCounter = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     @State private var correctIndexAnswer = 0
     @State private var answerText = ""
     @State private var endOfGameText = ""
@@ -50,6 +54,14 @@ struct AmericaQuiz: View {
     @State private var showendOfGameAlert = false
     @State var endOfTextENG = "Total points!"
     @State var isVisible = false
+    @State var gameRoundTimer : Int = 30
+    @State var StartGameTimer = false
+    @State var endroundtimeout = false
+    @State var minusTime = -200
+    @State var plusTime = +1
+    @State var showWrong = false
+    @State var isNavigationBarHidden: Bool = true
+    @State var animationAmount = 1.0
     
     var body: some View {
         ZStack{
@@ -58,25 +70,24 @@ struct AmericaQuiz: View {
             
             
             VStack {
-                VStack{
+                
+                if (StartRound) {
                     Text(AmericaLang)
                         .font(.title2)
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                        
+                    
                         .foregroundColor(Color.white)
                         .shadow(color: .black, radius: 4, x: 0, y: 0)
-                    
-                    
-                    
-                    /*
-                     Text("\(currentRound) / 60")
-                         .font(.subheadline)
-                         .fontWeight(.medium)
-                         .padding()
-                     */
-                    
                 }
+                
+                if(StartGameTimer) {
+                    Text("Timeleft: \(RoundTimer)")
+                        .foregroundColor(Color.white).font(.title2).shadow(color: .black, radius: 6, x: 0, y: 0)
+                  
+                }
+                    
+                
                 
                 EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
@@ -197,11 +208,18 @@ struct AmericaQuiz: View {
             
             if(showCorrect)
             {
-                
-                Text("+\(String(showAMscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 100))
+                VStack{
+                Text("+\(String(showAMscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 80))
                     .shadow(color: .black, radius: 10, x: 0, y: 0)
-         
-            }
+                    
+                }
+                
+            } else if(showWrong)
+            {
+                
+                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.red).font(.system(size: 40)
+                                                                                                                    
+                )}
                         
             
             
@@ -211,6 +229,10 @@ struct AmericaQuiz: View {
             doLang()
             StartRound.toggle()
             CountToStart()
+            animationAmount = 1
+            
+            self.isNavigationBarHidden = true
+            
             
         })
         
@@ -233,19 +255,32 @@ struct AmericaQuiz: View {
             
         }
         
+        .onReceive(RoundtimerCounter) { time in
+            if RoundTimer == 0  {
+                
+                gameOver()
+                endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreAM))")
+                gameOver()
+            }else if self.RoundTimer > 0 {
+                self.RoundTimer -= 1
+            }
+            
+        }
+        
         
     }
     func CountryTapped(_ number: Int) {
-        /*
-         if currentRound >= 60 {
-             endOfGameText = "Grattis!"
-             gameOver()
-         }
-         */
-
+        
+         
+         
+        
         if number == correctIndexAnswer {
-            gameScoreAM = timeRemaining + gameScoreAM
+            gameScoreAM =  timeRemaining + gameScoreAM
             showAMscore = timeRemaining
+            RoundTimer = RoundTimer + 1
+            
+            
+            
             showCorrect = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -254,17 +289,32 @@ struct AmericaQuiz: View {
                 self.askQuestion()
                 timeRemaining = 300
             }
-        }
-        
-        else if number != correctIndexAnswer {
-            endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreAM))")
-            gameOver()
+            
+            
+            
+            
+            
+            
+        } else if number != correctIndexAnswer {
+            gameScoreAM = gameScoreAM - 200
+            showWrong = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                
+                showWrong = false
+            }
+            if gameScoreAM < 1 {
+                gameScoreAM = 0
+            }
             
             /*
-             Text("\(String(gameScoreAF))")
-             ("\(String(gameScoreAF))")
+             endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreEU))")
+             gameOver()
              */
+        } else if gameRoundTimer < 1 {
+            endroundtimeout.toggle()
         }
+        
     }
 
     func askQuestion() {
@@ -284,6 +334,7 @@ struct AmericaQuiz: View {
     func resetGame() {
         endOfGame = false
         gameScoreAM = 0
+        RoundTimer = 30
         askQuestion()
         timeRemaining = 300
     }
@@ -330,6 +381,8 @@ struct AmericaQuiz: View {
                 StartRound = false
                 
                 timeRemaining = 300
+                StartGameTimer.toggle()
+                
             }
         }
         

@@ -30,6 +30,9 @@ struct AsiaQuiz: View {
     @State private var TimeToStart = 3
     let Starttimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    @State private var RoundTimer = 32
+    let RoundtimerCounter = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     @State private var correctIndexAnswer = 0
     @State private var answerText = ""
     @State private var endOfGameText = ""
@@ -51,27 +54,38 @@ struct AsiaQuiz: View {
     @State private var showendOfGameAlert = false
     @State var endOfTextENG = "Total points!"
     @State var isVisible = false
+    @State var gameRoundTimer : Int = 30
+    @State var StartGameTimer = false
+    @State var endroundtimeout = false
+    @State var minusTime = -200
+    @State var plusTime = +1
+    @State var showWrong = false
+    @State var isNavigationBarHidden: Bool = true
+    @State var animationAmount = 1.0
+    
     
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
         VStack {
-            VStack{
-            Text(AsiaLang)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .padding(.bottom, 5)
+            
+            if (StartRound) {
+                Text(AsiaLang)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .padding(.bottom, 5)
                 
-                .foregroundColor(Color.white)
-                .shadow(color: .black, radius: 4, x: 0, y: 0)
-                /*
-                 Text("\(currentRound) / 60")
-                     .font(.subheadline)
-                     .fontWeight(.medium)
-                     .padding()
-                 */
+                    .foregroundColor(Color.white)
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
             }
+            
+            if(StartGameTimer) {
+                Text("Timeleft: \(RoundTimer)")
+                    .foregroundColor(Color.white).font(.title2).shadow(color: .black, radius: 6, x: 0, y: 0)
+              
+            }
+            
             
             EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
@@ -176,26 +190,42 @@ struct AsiaQuiz: View {
             
             if(showCorrect)
             {
-                Text("+\(String(showASscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 100))
+                VStack{
+                Text("+\(String(showASscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 80))
                     .shadow(color: .black, radius: 10, x: 0, y: 0)
-                    }
+                    
+                }
+                
+            } else if(showWrong)
+            {
+                
+                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.red).font(.system(size: 40)
+                                                                                                                    
+                )}
         
             
             
             
         }.onAppear(perform: {
-           doLang()
+            doLang()
             StartRound.toggle()
             CountToStart()
+            animationAmount = 1
+            
+            self.isNavigationBarHidden = true
+            
             
         })
         
+        
         .onReceive(timer) { time in
             if endOfGame == false {
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
+                if self.timeRemaining > 0 {
+                    self.timeRemaining -= 1
+                    
+                }
             }
-            }
+            
         }
         
         .onReceive(Starttimer) { time in
@@ -206,21 +236,29 @@ struct AsiaQuiz: View {
             
         }
         
+        .onReceive(RoundtimerCounter) { time in
+            if RoundTimer == 0  {
+                
+                gameOver()
+                endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreAS))")
+                gameOver()
+            }else if self.RoundTimer > 0 {
+                self.RoundTimer -= 1
+            }
+            
+        }
     }
     func CountryTapped(_ number: Int) {
-        /*
-         if currentRound >= 60 {
-             endOfGameText = "Grattis!"
-             gameOver()
-         }
-         */
-       
-
+        
+         
+         
+        
         if number == correctIndexAnswer {
             gameScoreAS =  timeRemaining + gameScoreAS
             showASscore = timeRemaining
+            RoundTimer = RoundTimer + 1
             
-            currentRound += 1
+            
             
             showCorrect = true
             
@@ -231,10 +269,31 @@ struct AsiaQuiz: View {
                 timeRemaining = 300
             }
             
+            
+            
+            
+            
+            
         } else if number != correctIndexAnswer {
-            endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreAS))")
-            gameOver()
-    }
+            gameScoreAS = gameScoreAS - 200
+            showWrong = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                
+                showWrong = false
+            }
+            if gameScoreAS < 1 {
+                gameScoreAS = 0
+            }
+            
+            /*
+             endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreEU))")
+             gameOver()
+             */
+        } else if gameRoundTimer < 1 {
+            endroundtimeout.toggle()
+        }
+        
     }
 
     func askQuestion() {
@@ -252,7 +311,9 @@ struct AsiaQuiz: View {
     }
 
     func resetGame() {
+        endOfGame = false
         gameScoreAS = 0
+        RoundTimer = 30
         askQuestion()
         timeRemaining = 300
     }
@@ -300,6 +361,8 @@ struct AsiaQuiz: View {
                 StartRound = false
                 
                 timeRemaining = 300
+                StartGameTimer.toggle()
+                
             }
         }
         

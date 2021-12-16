@@ -30,6 +30,9 @@ struct AfricaQuiz: View {
     @State private var TimeToStart = 3
     let Starttimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    @State private var RoundTimer = 32
+    let RoundtimerCounter = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     @State private var correctIndexAnswer = 0
     @State private var answerText = ""
     @State private var endOfGameText = ""
@@ -52,6 +55,14 @@ struct AfricaQuiz: View {
     @State var Countdown : Int = 3
     @State private var showendOfGameAlert = false
     @State var endOfTextENG = "Total points!"
+    @State var gameRoundTimer : Int = 30
+    @State var StartGameTimer = false
+    @State var endroundtimeout = false
+    @State var minusTime = -200
+    @State var plusTime = +1
+    @State var showWrong = false
+    @State var isNavigationBarHidden: Bool = true
+    @State var animationAmount = 1.0
     
     var body: some View {
         
@@ -63,24 +74,24 @@ struct AfricaQuiz: View {
             
             
             VStack {
-                VStack{
+                
+                if (StartRound) {
                     Text(AfricaLang)
                         .font(.title2)
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
+                    
                         .foregroundColor(Color.white)
                         .shadow(color: .black, radius: 4, x: 0, y: 0)
-                    
-                    
-                    
-                    /*
-                     Text("\(currentRound) / 60")
-                         .font(.subheadline)
-                         .fontWeight(.medium)
-                         .padding()
-                     */
-                    
                 }
+                
+                if(StartGameTimer) {
+                    Text("Timeleft: \(RoundTimer)")
+                        .foregroundColor(Color.white).font(.title2).shadow(color: .black, radius: 6, x: 0, y: 0)
+                  
+                }
+                    
+                
                 
                 EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
@@ -201,13 +212,23 @@ struct AfricaQuiz: View {
             
             if(showCorrect)
             {
-                
-                Text("+\(String(showAFscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 100))
+                VStack{
+                Text("+\(String(showAFscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 80))
                     .shadow(color: .black, radius: 10, x: 0, y: 0)
-         
-            }
+                    
+                }
+                
+            } else if(showWrong)
+            {
+                
+                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.red).font(.system(size: 40)
+                                                                                                                    
+                )}
                         
-            
+            /*
+             @State var isNavigationBarHidden: Bool = true
+             @State var animationAmount = 1.0
+             */
             
             
         }
@@ -215,6 +236,10 @@ struct AfricaQuiz: View {
             doLang()
             StartRound.toggle()
             CountToStart()
+            animationAmount = 1
+            
+            self.isNavigationBarHidden = true
+            
             
         })
         
@@ -237,19 +262,32 @@ struct AfricaQuiz: View {
             
         }
         
+        .onReceive(RoundtimerCounter) { time in
+            if RoundTimer == 0  {
+                
+                gameOver()
+                endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreAF))")
+                gameOver()
+            }else if self.RoundTimer > 0 {
+                self.RoundTimer -= 1
+            }
+            
+        }
+        
         
     }
     func CountryTapped(_ number: Int) {
-        /*
-         if currentRound >= 60 {
-             endOfGameText = "Grattis!"
-             gameOver()
-         }
-         */
-
+        
+         
+         
+        
         if number == correctIndexAnswer {
-            gameScoreAF = timeRemaining + gameScoreAF
+            gameScoreAF =  timeRemaining + gameScoreAF
             showAFscore = timeRemaining
+            RoundTimer = RoundTimer + 1
+            
+            
+            
             showCorrect = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -258,17 +296,32 @@ struct AfricaQuiz: View {
                 self.askQuestion()
                 timeRemaining = 300
             }
-        }
-        
-        else if number != correctIndexAnswer {
-            endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreAF))")
-            gameOver()
+            
+            
+            
+            
+            
+            
+        } else if number != correctIndexAnswer {
+            gameScoreAF = gameScoreAF - 200
+            showWrong = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                
+                showWrong = false
+            }
+            if gameScoreAF < 1 {
+                gameScoreAF = 0
+            }
             
             /*
-             Text("\(String(gameScoreAF))")
-             ("\(String(gameScoreAF))")
+             endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreEU))")
+             gameOver()
              */
+        } else if gameRoundTimer < 1 {
+            endroundtimeout.toggle()
         }
+        
     }
 
     func askQuestion() {
@@ -288,6 +341,7 @@ struct AfricaQuiz: View {
     func resetGame() {
         endOfGame = false
         gameScoreAF = 0
+        RoundTimer = 30
         askQuestion()
         timeRemaining = 300
     }
@@ -334,6 +388,8 @@ struct AfricaQuiz: View {
                 StartRound = false
                 
                 timeRemaining = 300
+                StartGameTimer.toggle()
+                
             }
         }
         

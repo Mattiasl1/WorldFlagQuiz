@@ -30,6 +30,9 @@ struct AllQuiz: View {
     @State private var TimeToStart = 3
     let Starttimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
+    @State private var RoundTimer = 32
+    let RoundtimerCounter = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     @State private var correctIndexAnswer = 0
     @State private var answerText = ""
     @State private var endOfGameText = ""
@@ -40,7 +43,7 @@ struct AllQuiz: View {
     
     @State private var CountryNameEN = ["Albania", "Andorra", "Austria", "Belarus", "Belgium", "Bosnia", "Bulgaria", "Croatia", "Czechia", "Denmark", "Estonia", "France", "Finland", "Germany", "Greece", "Iceland", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Moldova", "Netherlands", "North Macedonia", "Norway", "Liechtenstein", "Malta", "Monaco", "Montenegro", "Poland", "Portugal", "Romania", "Russia", "SanMarino", "Schweiz", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Ukraine", "Hungary", "United Kingdom", "Vatican City", "Armenia", "Azerbaijan", "Cambodia", "China", "Cyprus", "India", "Indonesia", "Iraq", "Japan", "Jordan", "Kazakhstan", "Kuwait", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Kyrgyzstan", "Lebanon", "Maldives", "Mongolia", "Nepal", "United arab Emirates", "Israel", "Laos", "North Korea", "Oman", "Pakistan", "Palestine", "Philippines", "Saudi Arabia", "South Korea", "Syria", "Tajikistan", "Thailand", "Taiwan", "Timor-Leste", "Turkey", "Singapore", "Qatar", "Uzbekistan", "Vietnam", "Yemen", "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "C.African Republic", "Cameroon", "Djibouti", "Cape Verde", "Chad", "Comoros", "DR Congo", "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "GuineaBissau", "Ivory Coast", "Kenya", "Lesotho", "Liberia", "Libya", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Morocco", "Mozambique", "Namibia", "Niger", "Nigeria", "Republic of Congo", "Rwanda", "Sao Tome & Principe", "Senegal", "Seychelles", "SierraLeone", "Somalia", "South Africa", "South Sudan", "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe", "Antigua & Barbuda", "Argentina", "Bahamas", "Barbados", "Belize", "Bolivia", "Brazil", "Canada", "Chile", "Colombia", "Costa Rica", "Cuba", "Dominica", "Dominican Republic", "Ecuador", "El Salvador", "Grenada", "Guatemala", "Guyana", "Haiti", "Honduras", "Jamaica", "Mexico", "Nicaragua", "Panama", "Paraguay", "Peru", "Saint Kitts & Nevis", "Saint Lucia", "Saint Vincent & Grenadines", "Suriname", "Trinidad & Tobago", "Usa", "Uruguay", "Venezuela"].shuffled()
     
-    @State private var CountryName = ["Algeriet", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "C.Afrikanska republiken", "Djibouti", "Egypten", "Ekvatorialguinea", "Elfenbenskusten", "Eritrea", "Etiopien", "Gabon", "Gambia", "Japan", "Jemen", "Jordanien", "Kambodja", "Ghana", "Guinea", "GuineaBissau", "Kamerun", "Kapverde", "Kenya", "KongoBrazzaville", "KongoKinshasa", "Lesotho", "Liberia", "Libyen", "Madagaskar", "Malawi", "Mali", "Marocko", "Mauretanien", "Mauritius", "Moçambique", "Namibia", "Niger", "Nigeria", "Rwanda", "São Tomé och Príncipe", "Senegal", "Seychellerna", "Sierraleone", "Somalia", "Sudan", "Swaziland", "Sydafrika", "Sydsudan", "Tanzania", "Tchad", "Togo", "Tunisien", "Uganda", "Zambia", "Zimbabwe", "Albanien", "Andorra", "Belarus", "Belgien", "Bosnien", "Bulgarien", "Danmark", "Estland", "Finland", "Frankrike", "Grekland", "Irland", "Island", "Italien", "Kroatien", "Lettland", "Liechtenstein", "Litauen", "Luxemburg", "Malta", "Moldavien", "Monaco", "Montenegro", "Nederländerna", "Nordmakedonien", "Norge", "Polen", "Portugal", "Rumänien", "Ryssland", "SanMarino", "Schweiz", "Serbien", "Slovakien", "Slovenien", "Spanien", "Storbritannien", "Sverige", "Tjeckien", "Tyskland", "Ukraina", "Ungern", "Vatikanstaten", "Wales", "Österrike", "Afghanistan", "Armenien", "Azerbajdzjan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cypern", "Filippinerna", "Förenade Arabemiraten", "Indien", "Indonesien", "Irak", "Iran", "Israel", "Japan", "Jemen", "Jordanien", "Kambodja", "Kazakstan", "Kina", "Kirgizistan", "Kuwait", "Laos", "Libanon", "Malaysia", "Maldiverna", "Mongoliet", "Myanmar", "Nepal", "Nordkorea", "Oman", "Pakistan", "Qatar", "Saudiarabien", "Singapore", "Sri Lanka", "Sydkorea", "Syrien", "Tadzjikistan", "Taiwan", "Thailand", "Turkiet", "Turkmenistan", "Uzbekistan", "Vietnam", "Östtimor", "Antigua och Barbuda", "Argentina", "Bahamas", "Barbados", "Belize", "Bolivia", "Brasilien", "Chile", "Colombia", "Costa Rica", "Dominica", "Dominikanska republiken", "Ecuador", "El Salvador", "Grenada", "Guatemala", "Guyana", "Haiti", "Honduras", "Jamaica", "Kanada", "Kuba", "Mexiko", "Nicaragua", "Panama", "Paraguay", "Peru", "Saint Kitts och Nevis", "Saint Lucia", "Saint Vincent", "Surinam", "Trinidad och Tobago", "Uruguay", "Usa", "Venezuela", "Australien", "Fiji", "Kiribati", "Marshallöarna", "Mikronesien", "Nauru", "Nya Zeeland", "Palau", "Papua Nya Guinea", "Salomonöarna", "Samoa", "Tonga", "Tubalu", "Vanuatu"].shuffled()
+    @State private var CountryName = ["Algeriet", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "C.Afrikanska republiken", "Djibouti", "Egypten", "Ekvatorialguinea", "Elfenbenskusten", "Eritrea", "Etiopien", "Gabon", "Gambia", "Japan", "Jemen", "Jordanien", "Kambodja", "Ghana", "Guinea", "GuineaBissau", "Kamerun", "Kapverde", "Kenya", "KongoBrazzaville", "KongoKinshasa", "Lesotho", "Liberia", "Libyen", "Madagaskar", "Malawi", "Mali", "Marocko", "Mauretanien", "Mauritius", "Moçambique", "Namibia", "Niger", "Nigeria", "Rwanda", "São Tomé och Príncipe", "Senegal", "Seychellerna", "Sierraleone", "Somalia", "Sudan", "Swaziland", "Sydafrika", "Sydsudan", "Tanzania", "Tchad", "Togo", "Tunisien", "Uganda", "Zambia", "Zimbabwe", "Albanien", "Andorra", "Belarus", "Belgien", "Bosnien", "Bulgarien", "Danmark", "Estland", "Finland", "Frankrike", "Grekland", "Irland", "Island", "Italien", "Kroatien", "Lettland", "Liechtenstein", "Litauen", "Luxemburg", "Malta", "Moldavien", "Monaco", "Montenegro", "Nederländerna", "Nordmakedonien", "Norge", "Polen", "Portugal", "Rumänien", "Ryssland", "SanMarino", "Schweiz", "Serbien", "Slovakien", "Slovenien", "Spanien", "Storbritannien", "Sverige", "Tjeckien", "Tyskland", "Ukraina", "Ungern", "Vatikanstaten", "Österrike", "Afghanistan", "Armenien", "Azerbajdzjan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cypern", "Filippinerna", "Förenade Arabemiraten", "Indien", "Indonesien", "Irak", "Iran", "Israel", "Japan", "Jemen", "Jordanien", "Kambodja", "Kazakstan", "Kina", "Kirgizistan", "Kuwait", "Laos", "Libanon", "Malaysia", "Maldiverna", "Mongoliet", "Myanmar", "Nepal", "Nordkorea", "Oman", "Pakistan", "Qatar", "Saudiarabien", "Singapore", "Sri Lanka", "Sydkorea", "Syrien", "Tadzjikistan", "Taiwan", "Thailand", "Turkiet", "Turkmenistan", "Uzbekistan", "Vietnam", "Östtimor", "Antigua och Barbuda", "Argentina", "Bahamas", "Barbados", "Belize", "Bolivia", "Brasilien", "Chile", "Colombia", "Costa Rica", "Dominica", "Dominikanska republiken", "Ecuador", "El Salvador", "Grenada", "Guatemala", "Guyana", "Haiti", "Honduras", "Jamaica", "Kanada", "Kuba", "Mexiko", "Nicaragua", "Panama", "Paraguay", "Peru", "Saint Kitts och Nevis", "Saint Lucia", "Saint Vincent", "Surinam", "Trinidad och Tobago", "Uruguay", "Usa", "Venezuela", "Australien", "Fiji", "Kiribati", "Marshallöarna", "Mikronesien", "Nauru", "Nya Zeeland", "Palau", "Papua Nya Guinea", "Salomonöarna", "Samoa", "Tonga", "Tubalu", "Vanuatu"].shuffled()
     
     @State private var showALLscore : Int = 0
     @State var showCorrect = false
@@ -51,6 +54,14 @@ struct AllQuiz: View {
     @State var endOfTextENG = "Total points!"
     @State var StartRound = false
     @State var isVisible = false
+    @State var gameRoundTimer : Int = 30
+    @State var StartGameTimer = false
+    @State var endroundtimeout = false
+    @State var minusTime = -200
+    @State var plusTime = +1
+    @State var showWrong = false
+    @State var isNavigationBarHidden: Bool = true
+    @State var animationAmount = 1.0
     
     var body: some View {
         ZStack{
@@ -59,25 +70,24 @@ struct AllQuiz: View {
             
             
             VStack {
-                VStack{
+                
+                if (StartRound) {
                     Text(AllLang)
                         .font(.title2)
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                        
+                    
                         .foregroundColor(Color.white)
                         .shadow(color: .black, radius: 4, x: 0, y: 0)
-                    
-                    
-                    
-                    /*
-                     Text("\(currentRound) / 60")
-                         .font(.subheadline)
-                         .fontWeight(.medium)
-                         .padding()
-                     */
-                    
                 }
+                
+                if(StartGameTimer) {
+                    Text("Timeleft: \(RoundTimer)")
+                        .foregroundColor(Color.white).font(.title2).shadow(color: .black, radius: 6, x: 0, y: 0)
+                  
+                }
+                    
+                
                 
                 EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
@@ -198,11 +208,18 @@ struct AllQuiz: View {
             
             if(showCorrect)
             {
-                
-                Text("+\(String(showALLscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 100))
+                VStack{
+                Text("+\(String(showALLscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 80))
                     .shadow(color: .black, radius: 10, x: 0, y: 0)
-         
-            }
+                    
+                }
+                
+            } else if(showWrong)
+            {
+                
+                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.red).font(.system(size: 40)
+                                                                                                                    
+                )}
                         
             
             
@@ -212,6 +229,10 @@ struct AllQuiz: View {
             doLang()
             StartRound.toggle()
             CountToStart()
+            animationAmount = 1
+            
+            self.isNavigationBarHidden = true
+            
             
         })
         
@@ -234,19 +255,32 @@ struct AllQuiz: View {
             
         }
         
+        .onReceive(RoundtimerCounter) { time in
+            if RoundTimer == 0  {
+                
+                gameOver()
+                endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreALL))")
+                gameOver()
+            }else if self.RoundTimer > 0 {
+                self.RoundTimer -= 1
+            }
+            
+        }
+        
         
     }
     func CountryTapped(_ number: Int) {
-        /*
-         if currentRound >= 60 {
-             endOfGameText = "Grattis!"
-             gameOver()
-         }
-         */
-
+        
+         
+         
+        
         if number == correctIndexAnswer {
-            gameScoreALL = timeRemaining + gameScoreALL
+            gameScoreALL =  timeRemaining + gameScoreALL
             showALLscore = timeRemaining
+            RoundTimer = RoundTimer + 1
+            
+            
+            
             showCorrect = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -255,17 +289,32 @@ struct AllQuiz: View {
                 self.askQuestion()
                 timeRemaining = 300
             }
-        }
-        
-        else if number != correctIndexAnswer {
-            endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreALL))")
-            gameOver()
+            
+            
+            
+            
+            
+            
+        } else if number != correctIndexAnswer {
+            gameScoreALL = gameScoreALL - 200
+            showWrong = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                
+                showWrong = false
+            }
+            if gameScoreALL < 1 {
+                gameScoreALL = 0
+            }
             
             /*
-             Text("\(String(gameScoreAF))")
-             ("\(String(gameScoreAF))")
+             endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreEU))")
+             gameOver()
              */
+        } else if gameRoundTimer < 1 {
+            endroundtimeout.toggle()
         }
+        
     }
 
     func askQuestion() {
@@ -285,6 +334,7 @@ struct AllQuiz: View {
     func resetGame() {
         endOfGame = false
         gameScoreALL = 0
+        RoundTimer = 30
         askQuestion()
         timeRemaining = 300
     }
@@ -331,6 +381,8 @@ struct AllQuiz: View {
                 StartRound = false
                 
                 timeRemaining = 300
+                StartGameTimer.toggle()
+                
             }
         }
         
