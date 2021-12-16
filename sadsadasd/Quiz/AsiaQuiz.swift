@@ -19,11 +19,17 @@ struct AsiaImageQuiz: View {
             .renderingMode(.original)
             .resizable()
             .frame(width: 320, height: 200)
+            .shadow(color: .black, radius: 10, x: 0, y: 0)
     }
 }
 
 struct AsiaQuiz: View {
-    @State private var timeRemaining = 15
+    @State private var timeRemaining = 300
+    let timer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
+    
+    @State private var TimeToStart = 3
+    let Starttimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     @State private var correctIndexAnswer = 0
     @State private var answerText = ""
     @State private var endOfGameText = ""
@@ -31,11 +37,20 @@ struct AsiaQuiz: View {
     @State private var currentRound = 1
     @State private var showingScore = true
     @State private var endOfGame = false
+    
+    @State private var CountryNameEN = ["Armenia", "Azerbaijan", "Cambodia", "China", "Cyprus", "India", "Indonesia", "Iraq", "Japan", "Jordan", "Kazakhstan", "Kuwait", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Kyrgyzstan", "Lebanon", "Maldives", "Mongolia", "Nepal", "United arab Emirates", "Israel", "Laos", "North Korea", "Oman", "Pakistan", "Palestine", "Philippines", "Saudi Arabia", "South Korea", "Syria", "Tajikistan", "Thailand", "Taiwan", "Timor-Leste", "Turkey", "Singapore", "Qatar", "Uzbekistan", "Vietnam", "Yemen"].shuffled()
    
-    @State private var CountryName = ["Afghanistan", "Armenien", "Azerbajdzjan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cypern", "Filippinerna", "F Arabemiraten", "Indien", "Indonesien", "Irak", "Iran", "Israel", "Japan", "Jemen", "Jordanien", "Kambodja", "Kazakstan", "Kina", "Kirgizistan", "Kuwait", "Laos", "Libanon", "Malaysia", "Maldiverna", "Mongoliet", "Myanmar", "Nepal", "Nordkorea", "Oman", "Pakistan", "Qatar", "Saudiarabien", "Singapore", "Sri Lanka", "Sydkorea", "Syrien", "Tadzjikistan", "Taiwan", "Thailand", "Turkiet", "Turkmenistan", "Uzbekistan", "Vietnam", "Östtimor"].shuffled()
+    @State private var CountryName = ["Afghanistan", "Armenien", "Azerbajdzjan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cypern", "Filippinerna", "F Arabemiraten", "Indien", "Indonesien", "Irak", "Iran", "Israel", "Japan", "Jemen", "Jordanien", "Kambodja", "Kazakstan", "Kina", "Kirgizistan", "Kuwait", "Laos", "Libanon", "Malaysia", "Maldiverna", "Mongoliet", "Myanmar", "Nepal", "Nordkorea", "Oman", "Pakistan", "Qatar", "Saudiarabien", "Singapore", "Sri Lanka", "Palestina", "Sydkorea", "Syrien", "Tadzjikistan", "Taiwan", "Thailand", "Turkiet", "Turkmenistan", "Uzbekistan", "Vietnam", "Östtimor"].shuffled()
     
-    
+    @State private var showASscore : Int = 0
     @State var showCorrect = false
+    @State var AsiaLang = "Quiz Asia"
+    @State var playAgain = "Play again"
+    @State var StartRound = false
+    @State var Countdown : Int = 3
+    @State private var showendOfGameAlert = false
+    @State var endOfTextENG = "Total points!"
+    @State var isVisible = false
     
     var body: some View {
         ZStack{
@@ -43,22 +58,25 @@ struct AsiaQuiz: View {
                 .edgesIgnoringSafeArea(.all)
         VStack {
             VStack{
-            Text("Quiz Asien")
+            Text(AsiaLang)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding(.bottom, 5)
-                .padding(.top, 10)
-                Text("\(currentRound) / 60")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                    .padding()
-
+                
+                .foregroundColor(Color.white)
+                .shadow(color: .black, radius: 4, x: 0, y: 0)
+                /*
+                 Text("\(currentRound) / 60")
+                     .font(.subheadline)
+                     .fontWeight(.medium)
+                     .padding()
+                 */
             }
             
             EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
                 
-            Spacer()
+            
             //timerview()
             HStack {
                 Text("Score:")
@@ -71,28 +89,43 @@ struct AsiaQuiz: View {
             }
             
             
-            .padding()
-            .alert(isPresented: $endOfGame) {
-                Alert(title: Text(endOfGameText), message: Text("Du fick totalt \(gameScoreAS) poäng!"), dismissButton: .default(Text("Spela igen")) {
-                    
-                    // Spara poäng
+            
+            
+            .alert(endOfGameText, isPresented: $showendOfGameAlert) {
+                Button(playAgain, role: .cancel) {
                     let oldscore = UserDefaults.standard.integer(forKey: "asia")
                     
                     if(gameScoreAS > oldscore)
                     {
                         UserDefaults.standard.set(gameScoreAS, forKey: "asia")
+                        
                     }
                     
                     self.resetGame()
-                })
+                }
             }
-            Text("Extra poäng: \(timeRemaining)")
+            /*
+             .alert(isPresented: $endOfGame) {
+                 Alert(title: Text(endOfGameText), message: Text("You got a total of \(gameScoreAS) points!"), dismissButton: .default(Text(playAgain)) {
+                     
+                     // Spara poäng
+                     let oldscore = UserDefaults.standard.integer(forKey: "asia")
+                     
+                     if(gameScoreAS > oldscore)
+                     {
+                         UserDefaults.standard.set(gameScoreAS, forKey: "asia")
+                     }
+                     
+                     self.resetGame()
+                 })
+             }
+             */
+            Text("Points: \(timeRemaining)")
                 .padding()
+            .font(.title2)
             
             
             
-            Spacer()
-            Spacer()
             
             
             
@@ -104,77 +137,104 @@ struct AsiaQuiz: View {
                     Text(self.CountryName[number])
                         .font(.largeTitle)
                         .fontWeight(.semibold)
+                        .shadow(color: .black, radius: 3, x: 0, y: 0)
                         .foregroundColor(.white)
+                        
                         .frame(width: 350, height: 70)
-                        .background(Color("MyBlue"))
+                        .background(Color.purple)
                         .cornerRadius(10)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 30)
+                            RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.black, lineWidth: 5)
                         )
-                        .cornerRadius(30)
+                        .cornerRadius(10)
                         .padding(.bottom, 10.0)
+                        .shadow(color: .black, radius: 4, x: 0, y: 0)
                     
                 }
                 
             }
             
-            Spacer()
-            Spacer()
+           
         }
+            
+            if(StartRound)
+            {
+                Text((String(Countdown))).fontWeight(.bold).foregroundColor(Color.white).font(.system(size: 250))
+                    .opacity(isVisible ? 1 : 0.8)
+                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                    .scaleEffect(isVisible ? 1.4 : 0.4)
+                    .onAppear {
+                        withAnimation(.spring(response: 1, dampingFraction: 0.1, blendDuration: 0)) {
+                            self.isVisible.toggle()
+                        }
+                    }
+                    
+                    
+            }
             
             
             if(showCorrect)
             {
-                Text("RÄTT SVAR").background(Color.green).frame(width: 300, height: 200).font(.largeTitle)
-            }
+                Text("+\(String(showASscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 100))
+                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                    }
         
             
             
             
-        }
+        }.onAppear(perform: {
+           doLang()
+            StartRound.toggle()
+            CountToStart()
+            
+        })
         
         .onReceive(timer) { time in
+            if endOfGame == false {
             if self.timeRemaining > 0 {
                 self.timeRemaining -= 1
-                
+            }
             }
         }
         
+        .onReceive(Starttimer) { time in
+            if self.Countdown > 0 {
+                self.Countdown -= 1
+                
+            }
+            
+        }
         
     }
     func CountryTapped(_ number: Int) {
-        if currentRound >= 60 {
-            endOfGameText = "Grattis!"
-            gameOver()
-        }
+        /*
+         if currentRound >= 60 {
+             endOfGameText = "Grattis!"
+             gameOver()
+         }
+         */
        
 
         if number == correctIndexAnswer {
-            gameScoreAS = 10 + timeRemaining + gameScoreAS
+            gameScoreAS =  timeRemaining + gameScoreAS
+            showASscore = timeRemaining
             
             currentRound += 1
             
             showCorrect = true
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 
                 showCorrect = false
                 self.askQuestion()
-                timeRemaining = 15
+                timeRemaining = 300
             }
             
         } else if number != correctIndexAnswer {
-            endOfGameText = "Game Over!"
+            endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreAS))")
             gameOver()
-            timeRemaining = 15
-        }; if timeRemaining < 0 {
-            endOfGameText = "Game Over!"
-            gameOver()
-        }
-        if endOfGame == true {
-            
-        }
+    }
     }
 
     func askQuestion() {
@@ -184,6 +244,7 @@ struct AsiaQuiz: View {
 
     func gameOver() {
         endOfGame = true
+        showendOfGameAlert = true
     }
 
     func wrongAnswer() {
@@ -192,8 +253,8 @@ struct AsiaQuiz: View {
 
     func resetGame() {
         gameScoreAS = 0
-        currentRound = 1
         askQuestion()
+        timeRemaining = 300
     }
     
     func timeRunOut() {
@@ -202,6 +263,47 @@ struct AsiaQuiz: View {
         }
     }
     
+    func doLang()
+    {
+        var lang = UserDefaults.standard.string(forKey: "lang")
+        if(lang == nil)
+        {
+            UserDefaults.standard.set("en", forKey: "lang")
+            lang = "en"
+        }
+        
+        if(lang == "en")
+        {
+            CountryName = CountryNameEN
+            AsiaLang = "Quiz Asia"
+            playAgain = "Play again"
+            endOfTextENG = "Total points: "
+            
+        } else {
+            CountryName = CountryName
+            AsiaLang = "Quiz Asien"
+            playAgain = "Spela igen"
+            endOfTextENG = "Totala poäng: "
+           
+        }
+    }
+    
+    
+    func CountToStart() {
+        
+        if StartRound == true {
+            timeRemaining = 0
+            StartRound = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+                
+                StartRound = false
+                
+                timeRemaining = 300
+            }
+        }
+        
+    }
     
 }
 

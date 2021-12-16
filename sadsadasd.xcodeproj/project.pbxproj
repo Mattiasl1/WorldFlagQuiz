@@ -11,7 +11,7 @@
 		87190BA3274F8D04007770CC /* ALTbackGone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190BA2274F8D04007770CC /* ALTbackGone.swift */; };
 		87190BA5274F8D51007770CC /* ALTbackGtwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87190BA4274F8D51007770CC /* ALTbackGtwo.swift */; };
 		871EE672274386E200E64C4B /* globestart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871EE671274386E200E64C4B /* globestart.swift */; };
-		8741C6172748111300E96363 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741C6162748111300E96363 /* AlertView.swift */; };
+		872EA2222764FA3200EAD9E9 /* AltHomescreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872EA2212764FA3200EAD9E9 /* AltHomescreen.swift */; };
 		8741C619274B846B00E96363 /* LeaderBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8741C618274B846B00E96363 /* LeaderBoardView.swift */; };
 		8757FCD427467901005287F1 /* AsiaQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757FCD327467901005287F1 /* AsiaQuiz.swift */; };
 		8757FCD62746898F005287F1 /* AfricaQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757FCD52746898F005287F1 /* AfricaQuiz.swift */; };
@@ -19,6 +19,7 @@
 		8757FCDA274689A8005287F1 /* AllQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757FCD9274689A8005287F1 /* AllQuiz.swift */; };
 		8757FCDD2746EFC5005287F1 /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757FCDC2746EFC5005287F1 /* BackgroundColor.swift */; };
 		876296A1275401F0005BDB7B /* chooseQuizENG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876296A0275401F0005BDB7B /* chooseQuizENG.swift */; };
+		8773CC9D2763925500024F9B /* AltChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773CC9C2763925500024F9B /* AltChooseView.swift */; };
 		87AF8AEF2742802B0021321D /* sadsadasdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF8AEE2742802B0021321D /* sadsadasdApp.swift */; };
 		87AF8AF32742802C0021321D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87AF8AF22742802C0021321D /* Assets.xcassets */; };
 		87AF8AF62742802C0021321D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87AF8AF52742802C0021321D /* Preview Assets.xcassets */; };
@@ -39,6 +40,7 @@
 		87E8CE0D2745246300EDB61D /* chooseQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8CE0C2745246300EDB61D /* chooseQuiz.swift */; };
 		87E8CE0F2745385600EDB61D /* EuropeQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8CE0E2745385600EDB61D /* EuropeQuiz.swift */; };
 		87E8CE112746406A00EDB61D /* Timer2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E8CE102746406A00EDB61D /* Timer2.swift */; };
+		87F6FAC2275E11C3008AC031 /* AlertViewOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F6FAC1275E11C3008AC031 /* AlertViewOne.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +48,7 @@
 		87190BA2274F8D04007770CC /* ALTbackGone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTbackGone.swift; sourceTree = "<group>"; };
 		87190BA4274F8D51007770CC /* ALTbackGtwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTbackGtwo.swift; sourceTree = "<group>"; };
 		871EE671274386E200E64C4B /* globestart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = globestart.swift; sourceTree = "<group>"; };
-		8741C6162748111300E96363 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		872EA2212764FA3200EAD9E9 /* AltHomescreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltHomescreen.swift; sourceTree = "<group>"; };
 		8741C618274B846B00E96363 /* LeaderBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderBoardView.swift; sourceTree = "<group>"; };
 		8757FCD327467901005287F1 /* AsiaQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsiaQuiz.swift; sourceTree = "<group>"; };
 		8757FCD52746898F005287F1 /* AfricaQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfricaQuiz.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		8757FCD9274689A8005287F1 /* AllQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllQuiz.swift; sourceTree = "<group>"; };
 		8757FCDC2746EFC5005287F1 /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		876296A0275401F0005BDB7B /* chooseQuizENG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseQuizENG.swift; sourceTree = "<group>"; };
+		8773CC9C2763925500024F9B /* AltChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltChooseView.swift; sourceTree = "<group>"; };
 		87AF8AEB2742802B0021321D /* sadsadasd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sadsadasd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AF8AEE2742802B0021321D /* sadsadasdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sadsadasdApp.swift; sourceTree = "<group>"; };
 		87AF8AF22742802C0021321D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 		87E8CE0C2745246300EDB61D /* chooseQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseQuiz.swift; sourceTree = "<group>"; };
 		87E8CE0E2745385600EDB61D /* EuropeQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EuropeQuiz.swift; sourceTree = "<group>"; };
 		87E8CE102746406A00EDB61D /* Timer2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer2.swift; sourceTree = "<group>"; };
+		87F6FAC1275E11C3008AC031 /* AlertViewOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewOne.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,12 +120,10 @@
 		8762969F274FBC9B005BDB7B /* grupp */ = {
 			isa = PBXGroup;
 			children = (
-				871EE671274386E200E64C4B /* globestart.swift */,
 				87AF8AFE274282DC0021321D /* AnswerButton.swift */,
 				87E8CD8A2743AAAD00EDB61D /* QuizView.swift */,
 				87E8CD8C2743AB6200EDB61D /* Flags.swift */,
 				87E8CE102746406A00EDB61D /* Timer2.swift */,
-				8741C6162748111300E96363 /* AlertView.swift */,
 				87E8CD8E2743BC0C00EDB61D /* timerview.swift */,
 			);
 			path = grupp;
@@ -150,11 +152,15 @@
 				87E4BACE2754CD4C003C48C8 /* ContentViewENG.swift */,
 				876296A0275401F0005BDB7B /* chooseQuizENG.swift */,
 				87E8CE0A2745224000EDB61D /* ContentView.swift */,
+				872EA2212764FA3200EAD9E9 /* AltHomescreen.swift */,
+				8773CC9C2763925500024F9B /* AltChooseView.swift */,
 				87E8CE0C2745246300EDB61D /* chooseQuiz.swift */,
 				87E4BAD42754D7A0003C48C8 /* CountryListView.swift */,
+				871EE671274386E200E64C4B /* globestart.swift */,
+				87F6FAC1275E11C3008AC031 /* AlertViewOne.swift */,
+				8757FCDB274689B5005287F1 /* Quiz */,
 				87E4BAD82754EDB3003C48C8 /* LeaderBoardViews */,
 				87190BA1274F8CDD007770CC /* ALTbackgrounds */,
-				8757FCDB274689B5005287F1 /* Quiz */,
 				8762969F274FBC9B005BDB7B /* grupp */,
 				87AF8AF22742802C0021321D /* Assets.xcassets */,
 				87AF8AF42742802C0021321D /* Preview Content */,
@@ -281,9 +287,12 @@
 				87190BA3274F8D04007770CC /* ALTbackGone.swift in Sources */,
 				87AF8AFF274282DC0021321D /* AnswerButton.swift in Sources */,
 				87E4BADC2754EEB6003C48C8 /* AsiaScore.swift in Sources */,
+				8773CC9D2763925500024F9B /* AltChooseView.swift in Sources */,
 				876296A1275401F0005BDB7B /* chooseQuizENG.swift in Sources */,
+				872EA2222764FA3200EAD9E9 /* AltHomescreen.swift in Sources */,
 				87E8CD8F2743BC0C00EDB61D /* timerview.swift in Sources */,
 				87190BA0274F86E1007770CC /* testquizView.swift in Sources */,
+				87F6FAC2275E11C3008AC031 /* AlertViewOne.swift in Sources */,
 				87E8CD8B2743AAAD00EDB61D /* QuizView.swift in Sources */,
 				87E8CE112746406A00EDB61D /* Timer2.swift in Sources */,
 				8757FCDD2746EFC5005287F1 /* BackgroundColor.swift in Sources */,
@@ -297,7 +306,6 @@
 				87E4BAD32754D10B003C48C8 /* ALTquizButtonView.swift in Sources */,
 				87E4BAE22754EED7003C48C8 /* AllworldScore.swift in Sources */,
 				87E8CE0B2745224000EDB61D /* ContentView.swift in Sources */,
-				8741C6172748111300E96363 /* AlertView.swift in Sources */,
 				87AF8AEF2742802B0021321D /* sadsadasdApp.swift in Sources */,
 				871EE672274386E200E64C4B /* globestart.swift in Sources */,
 			);

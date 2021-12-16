@@ -11,6 +11,9 @@ struct AmericaScore: View {
     
     @State var americapoints = UserDefaults.standard.integer(forKey: "america")
     
+    @State var recordText = "All time high"
+    @State var partOfW = "Europe"
+    
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -20,7 +23,7 @@ struct AmericaScore: View {
             VStack{
                 Spacer()
                 //gamescoreAM
-                Text("Rekord")
+                Text(recordText)
                     .font(.title)
                     .fontWeight(.black)
                     .foregroundColor(.white)
@@ -29,13 +32,13 @@ struct AmericaScore: View {
                 
                 
                 Text(String(americapoints))
-                    .font(.system(size: 120))
+                    .font(.system(size: 60))
                     .fontWeight(.black)
                     .foregroundColor(.white)
                     .shadow(color: .red, radius: 4, x: 0, y: 0)
                 
                 Spacer()
-                Text("AMERIKA")
+                Text(partOfW)
                     .font(.system(size: 80))
                     .fontWeight(.black)
                     .foregroundColor(.white)
@@ -44,6 +47,28 @@ struct AmericaScore: View {
                 Spacer()
             }
             
+        }.onAppear(perform: {
+            
+            doLang()
+            
+        })
+    }
+    func doLang()
+    {
+        var lang = UserDefaults.standard.string(forKey: "lang")
+        if(lang == nil)
+        {
+            UserDefaults.standard.set("en", forKey: "lang")
+            lang = "en"
+        }
+        
+        if(lang == "en")
+        {
+            recordText = "All time high"
+            partOfW = "America"
+        } else {
+            recordText = "Bästa score"
+            partOfW = "Amerika"
         }
     }
 }

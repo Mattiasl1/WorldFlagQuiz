@@ -9,6 +9,7 @@ import SwiftUI
 import AVFoundation
 
 
+
 struct EuropeImageQuiz: View {
     
     var imageName: String
@@ -19,15 +20,30 @@ struct EuropeImageQuiz: View {
             .renderingMode(.original)
             .resizable()
             .frame(width: 320, height: 200)
+            .shadow(color: .black, radius: 10, x: 0, y: 0)
         
     }
 }
 
+
+/*
+ .frame(width: 320, height: 200)
+ .resizable(resizingMode: .stretch)
+ .aspectRatio(contentMode: .fit)
+ */
+
+
 struct EuropeQuiz: View {
     
-    @State private var timeRemaining = 15
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var timeRemaining = 300
+    let timer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
     
+    
+    @State private var TimeToStart = 3
+    let Starttimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State private var RoundTimer = 30
+    let RoundtimerCounter = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State private var EuropeScore : Int = 0
     
@@ -38,16 +54,41 @@ struct EuropeQuiz: View {
     @State private var answerText = ""
     @State private var endOfGameText = ""
     @State private var gameScoreEU : Int = 0
+    @State private var showEuscore : Int = 0
     //@AppStorage("gameScoreEU") private var gameScoreEU = 0
     
     @State private var currentRound = 1
     @State private var showingScore = true
     @State private var endOfGame = false
+    @State private var showendOfGameAlert = false
+
+    @State private var CountryNameEN = ["Albania", "Andorra", "Austria", "Belarus", "Belgium", "Bosnia", "Bulgaria", "Croatia", "Czechia", "Denmark", "Estonia", "France", "Finland", "Germany", "Greece", "Iceland", "Ireland", "Italy", "Latvia", "Lithuania", "Luxembourg", "Moldova", "Netherlands", "North Macedonia", "Norway", "Liechtenstein", "Malta", "Monaco", "Montenegro", "Poland", "Portugal", "Romania", "Russia", "SanMarino", "Schweiz", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Ukraine", "Hungary", "United Kingdom", "Vatican City"].shuffled()
     
-    @State private var CountryName = ["Albanien", "Andorra", "Belarus", "Belgien", "Bosnien", "Bulgarien", "Danmark", "Estland", "Finland", "Frankrike", "Grekland", "Irland", "Island", "Italien", "Kroatien", "Lettland", "Liechtenstein", "Litauen", "Luxemburg", "Malta", "Moldavien", "Monaco", "Montenegro", "Nederländerna", "Nordmakedonien", "Norge", "Polen", "Portugal", "Rumänien", "Ryssland", "SanMarino", "Schweiz", "Serbien", "Skottland", "Slovakien", "Slovenien", "Spanien", "Storbritannien", "Sverige", "Tjeckien", "Tyskland", "Ukraina", "Ungern", "Vatikanstaten", "Österrike"].shuffled()
+    
+    @State private var CountryName = ["Albanien", "Andorra", "Belarus", "Belgien", "Bosnien", "Bulgarien", "Danmark", "Estland", "Finland", "Frankrike", "Grekland", "Irland", "Island", "Italien", "Kroatien", "Lettland", "Liechtenstein", "Litauen", "Luxemburg", "Malta", "Moldavien", "Monaco", "Montenegro", "Nederländerna", "Nordmakedonien", "Norge", "Polen", "Portugal", "Rumänien", "Ryssland", "SanMarino", "Schweiz", "Serbien", "Slovakien", "Slovenien", "Spanien", "Storbritannien", "Sverige", "Tjeckien", "Tyskland", "Ukraina", "Ungern", "Vatikanstaten", "Österrike"].shuffled()
     
     @State var animationAmount = 1.0
     @State var showCorrect = false
+    
+    
+    @State var youGot = "Du fick totalt"
+    @State var points = "poäng!"
+    @State var playAgain = "Play again!"
+    @State var extraPoints = "Points"
+    @State var europeLang = "Quiz Europe"
+    @State var StartRound = false
+    @State var Countdown : Int = 3
+    @State var endOfTextENG = "Total points!"
+    @State var isVisible = false
+    @State var isNavigationBarHidden: Bool = true
+    @State var gameRoundTimer : Int = 30
+    @State var StartGameTimer = false
+    
+  
+    
+    // animation
+    
+    
     
     var body: some View {
         
@@ -56,28 +97,43 @@ struct EuropeQuiz: View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+            
+            
             VStack {
+                Text(europeLang)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .padding(.bottom, 5)
+                    
+                    .foregroundColor(Color.white)
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
+                
                 VStack{
-                    Text("Quiz Europa")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 5)
-                        .padding(.top, 10)
+                    
+                    if(StartGameTimer) {
+                        Text("Timeleft: \(gameRoundTimer)")
+                            .foregroundColor(Color.white)
+                            .font(.title3)
+                        
+                    }
                     
                     
                     
-                    Text("\(currentRound) / 60")
-                        .font(.subheadline)
-                        .fontWeight(.medium)
-                        .padding()
+                    
+                    /*
+                     Text("\(currentRound) / 60")
+                         .font(.subheadline)
+                         .fontWeight(.medium)
+                         .padding()
+                     */
                     
                 }
                 
                 EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
+                    
                 
                 
-                Spacer()
                 
                 //timerview()
                 HStack {
@@ -91,9 +147,26 @@ struct EuropeQuiz: View {
                 }
                 
                 
-                .padding()
-                .alert(isPresented: $endOfGame) {
-                    Alert(title: Text(endOfGameText), message: Text("Du fick totalt \(gameScoreEU) poäng!"), dismissButton: .default(Text("Spela igen")) {
+                
+                .alert(endOfGameText, isPresented: $showendOfGameAlert) {
+                    Button(playAgain, role: .cancel) {
+                        let oldscore = UserDefaults.standard.integer(forKey: "europe")
+                        
+                        if(gameScoreEU > oldscore)
+                        {
+                            UserDefaults.standard.set(gameScoreEU, forKey: "europe")
+                            
+                        }
+                        
+                        self.resetGame()
+                    }
+                }
+                /*
+                .alert(isPresented: $showendOfGameAlert) {
+                    
+                    Alert(title: Text(endOfGameText), message:
+                            
+                            Text("You got a total of \(gameScoreEU) points!"), dismissButton: .default(Text(playAgain)) {
                         
                         // Spara poäng
                         let oldscore = UserDefaults.standard.integer(forKey: "europe")
@@ -107,16 +180,21 @@ struct EuropeQuiz: View {
                         self.resetGame()
                     })
                 }
+                */
+                
+                
+                HStack {
+                    Text("Points: \(timeRemaining)")
+                        .padding()
+                    .font(.title2)
+                    
+                    
+                }
                 
                 
                 
-                Text("Extra poäng: \(timeRemaining)")
-                    .padding()
                 
                 
-                
-                Spacer()
-                Spacer()
                 
                 
                 
@@ -124,91 +202,154 @@ struct EuropeQuiz: View {
                     Button(action: {
                         self.CountryTapped(number)
                         AudioServicesPlaySystemSound(1306)
-                    }) {
+                        
+                        
+                    })
+                    {
                         Text(self.CountryName[number])
                             .font(.largeTitle)
                             .fontWeight(.semibold)
+                            .shadow(color: .black, radius: 3, x: 0, y: 0)
                             .foregroundColor(.white)
+                            .aspectRatio(contentMode: .fit)
                             .frame(width: 350, height: 70)
-                            .background(Color("MyBlue"))
+                            .background(Color.green)
                             .cornerRadius(10)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 30)
+                                RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.black, lineWidth: 5)
                             )
-                            .cornerRadius(30)
+                            .cornerRadius(10)
                             .padding(.bottom, 10.0)
-                            
-                        
-                        
-                        
+                            .shadow(color: .black, radius: 4, x: 0, y: 0)
+     
                     }
+                    
                     
                 }
                 
-                Spacer()
-                Spacer()
+                
                 
             }
+            
+            if(StartRound)
+            {
+                Text((String(Countdown))).fontWeight(.bold).foregroundColor(Color.white).font(.system(size: 250))
+                    .opacity(isVisible ? 1 : 0.8)
+                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                    .scaleEffect(isVisible ? 1.4 : 0.4)
+                    .onAppear {
+                        withAnimation(.spring(response: 1, dampingFraction: 0.1, blendDuration: 0)) {
+                            self.isVisible.toggle()
+                        }
+                    }
+                    
+                    
+            }
+
+            
             
             
             if(showCorrect)
             {
-                Text("RÄTT").background(Color.green).frame(width: 300, height: 200).font(.title)
-                    
+                
+                Text("+\(String(showEuscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 100))
+                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+         
             }
-            
-            
-            
+                        
             
             
             
         }
+        .onAppear(perform: {
+            doLang()
+            StartRound.toggle()
+            CountToStart()
+            animationAmount = 1
+            
+            self.isNavigationBarHidden = true
+        
+            
+        })
+        
         
         .onReceive(timer) { time in
-            if self.timeRemaining > 0 {
-                self.timeRemaining -= 1
-                
+            if endOfGame == false {
+                if self.timeRemaining > 0 {
+                    self.timeRemaining -= 1
+                    
+                }
             }
+            
         }
         
+        .onReceive(Starttimer) { time in
+            if self.Countdown > 0 {
+                self.Countdown -= 1
+                
+            }
+            
+        }
+        
+        .onReceive(RoundtimerCounter) { time in
+            if self.gameRoundTimer > 0 {
+                self.gameRoundTimer -= 1
+            }
+        }
         
     }
     func CountryTapped(_ number: Int) {
-        if currentRound >= 60 {
-            endOfGameText = "Grattis!"
-            gameOver()
-            
-        }
+        /*
+         if currentRound >= 60 {
+             endOfGameText = "Grattis!"
+             gameOver()
+         }
+         */
         
         if number == correctIndexAnswer {
-            gameScoreEU = 10 + timeRemaining + gameScoreEU
+            gameScoreEU =  timeRemaining + gameScoreEU
+            showEuscore = timeRemaining
+            gameRoundTimer = gameRoundTimer + 1
             
-            currentRound += 1
+            
             
             showCorrect = true
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 
                 showCorrect = false
                 self.askQuestion()
-                timeRemaining = 15
+                timeRemaining = 300
             }
+            
+            
+            
             
             
             
         } else if number != correctIndexAnswer {
-            endOfGameText = "Game Over!"
-            gameOver()
-            timeRemaining = 15
+            gameRoundTimer = gameRoundTimer - 2
+           
             
-            
-        }; if timeRemaining < 0 {
-            endOfGameText = "Game Over!"
-            gameOver()
+            /*
+             endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreEU))")
+             gameOver()
+             */
+        } else if gameRoundTimer < 1 {
+            showendOfGameAlert = true
+            endOfGame = true
         }
         
     }
+    func timeout() {
+        if gameRoundTimer <= 20  {
+            endOfGameText = ("\(String(endOfTextENG))") + ("\(String(gameScoreEU))")
+            gameOver()
+        }
+    }
+    
+    
     
     func askQuestion() {
         CountryName.shuffle()
@@ -217,6 +358,7 @@ struct EuropeQuiz: View {
     
     func gameOver() {
         endOfGame = true
+        showendOfGameAlert = true
     }
     
     func wrongAnswer() {
@@ -224,20 +366,70 @@ struct EuropeQuiz: View {
     }
     
     func resetGame() {
+        endOfGame = false
         gameScoreEU = 0
-        currentRound = 1
         askQuestion()
+        timeRemaining = 300
     }
     
     
     
     func highscorepoint() {
+        showEuscore = 10 + timeRemaining
+    }
+    
+    func playMore() {
+        resetGame()
+    }
+    
+    func doLang()
+    {
+        var lang = UserDefaults.standard.string(forKey: "lang")
+        if(lang == nil)
+        {
+            UserDefaults.standard.set("en", forKey: "lang")
+            lang = "en"
+        }
         
+        if(lang == "en")
+        {
+            CountryName = CountryNameEN
+            europeLang = "Quiz Europe"
+            playAgain = "Play again"
+            endOfTextENG = "Total points: "
+            
+        } else {
+            CountryName = CountryName
+            europeLang = "Quiz Europa"
+            playAgain = "Spela igen"
+            endOfTextENG = "Totala poäng: "
+           
+        }
     }
     
     
+    func CountToStart() {
+        
+        if StartRound == true {
+            timeRemaining = 0
+            StartRound = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.4) {
+                
+                StartRound = false
+                StartGameTimer.toggle()
+                timeRemaining = 300
+                
+            }
+        }
+        
+    }
     
-    
+    func gametimeleft() {
+        if RoundTimer == 0 {
+            gameOver()
+        }
+    }
     
 }
 
@@ -255,6 +447,7 @@ struct EuropeQuiz: View {
 struct EuropeQuiz_Previews: PreviewProvider {
     static var previews: some View {
         EuropeQuiz()
+            .previewLayout(.sizeThatFits)
     }
 }
 

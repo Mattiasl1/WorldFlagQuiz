@@ -13,7 +13,10 @@ struct sadsadasdApp: App {
         WindowGroup {
             //timerview()
             //ALTchooseviewButton()
-            ContentView()
+           //ContentView()
+            AltHomescreen()
+            //AltChooseView()
+            //AlertViewOne()
            // BackgroundColor()
             //QuizView()
             //AsiaQuiz()
