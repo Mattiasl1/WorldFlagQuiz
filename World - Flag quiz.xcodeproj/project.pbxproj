@@ -57,7 +57,7 @@
 		8757FCDC2746EFC5005287F1 /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		876296A0275401F0005BDB7B /* chooseQuizENG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chooseQuizENG.swift; sourceTree = "<group>"; };
 		8773CC9C2763925500024F9B /* AltChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltChooseView.swift; sourceTree = "<group>"; };
-		87AF8AEB2742802B0021321D /* sadsadasd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sadsadasd.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87AF8AEB2742802B0021321D /* World - Flag quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "World - Flag quiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AF8AEE2742802B0021321D /* sadsadasdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sadsadasdApp.swift; sourceTree = "<group>"; };
 		87AF8AF22742802C0021321D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87AF8AF52742802C0021321D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		87AF8AEC2742802B0021321D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				87AF8AEB2742802B0021321D /* sadsadasd.app */,
+				87AF8AEB2742802B0021321D /* World - Flag quiz.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,9 +209,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		87AF8AEA2742802B0021321D /* sadsadasd */ = {
+		87AF8AEA2742802B0021321D /* World - Flag quiz */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 87AF8AF92742802C0021321D /* Build configuration list for PBXNativeTarget "sadsadasd" */;
+			buildConfigurationList = 87AF8AF92742802C0021321D /* Build configuration list for PBXNativeTarget "World - Flag quiz" */;
 			buildPhases = (
 				87AF8AE72742802B0021321D /* Sources */,
 				87AF8AE82742802B0021321D /* Frameworks */,
@@ -221,9 +221,9 @@
 			);
 			dependencies = (
 			);
-			name = sadsadasd;
+			name = "World - Flag quiz";
 			productName = sadsadasd;
-			productReference = 87AF8AEB2742802B0021321D /* sadsadasd.app */;
+			productReference = 87AF8AEB2742802B0021321D /* World - Flag quiz.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -241,7 +241,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 87AF8AE62742802B0021321D /* Build configuration list for PBXProject "sadsadasd" */;
+			buildConfigurationList = 87AF8AE62742802B0021321D /* Build configuration list for PBXProject "World - Flag quiz" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -254,7 +254,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				87AF8AEA2742802B0021321D /* sadsadasd */,
+				87AF8AEA2742802B0021321D /* World - Flag quiz */,
 			);
 		};
 /* End PBXProject section */
@@ -436,7 +436,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"sadsadasd/Preview Content\"";
 				DEVELOPMENT_TEAM = JP3R5582NV;
 				ENABLE_PREVIEWS = YES;
@@ -451,9 +451,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = se.mattiasliljenberg.sadsadasd;
-				PRODUCT_NAME = sadsadasd;
+				PRODUCT_NAME = "World - Flag quiz";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -466,7 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"sadsadasd/Preview Content\"";
 				DEVELOPMENT_TEAM = JP3R5582NV;
 				ENABLE_PREVIEWS = YES;
@@ -481,9 +481,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = se.mattiasliljenberg.sadsadasd;
-				PRODUCT_NAME = sadsadasd;
+				PRODUCT_NAME = "World - Flag quiz";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,7 +493,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		87AF8AE62742802B0021321D /* Build configuration list for PBXProject "sadsadasd" */ = {
+		87AF8AE62742802B0021321D /* Build configuration list for PBXProject "World - Flag quiz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				87AF8AF72742802C0021321D /* Debug */,
@@ -502,7 +502,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		87AF8AF92742802C0021321D /* Build configuration list for PBXNativeTarget "sadsadasd" */ = {
+		87AF8AF92742802C0021321D /* Build configuration list for PBXNativeTarget "World - Flag quiz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				87AF8AFA2742802C0021321D /* Debug */,

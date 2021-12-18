@@ -14,6 +14,17 @@
 import SwiftUI
 import AVFoundation
 
+extension ShapeStyle where Self == Color {
+    static var random: Color {
+        Color(
+            red: .random(in: 0...1),
+            green: .random(in: 0...1),
+            blue: .random(in: 0...1)
+            
+        )
+    }
+}
+
 struct AltHomescreen: View {
     @State var animationAmount = 1.0
     @State var onClick = false
@@ -43,7 +54,7 @@ struct AltHomescreen: View {
                         .font(.system(size: 30))
                         .fontWeight(.bold)
                         .underline()
-                        .foregroundColor(.white)
+                        .foregroundColor(.random)
                         .padding()
                     HStack{
                         
