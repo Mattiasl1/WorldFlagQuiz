@@ -34,6 +34,11 @@ struct AltHomescreen: View {
     @State var letsPlayEng = "PLAY"
     @State var highScoreEng = "HIGHSCORE"
     
+    @State var xPos1: CGFloat = 200
+    @State var yPos1: CGFloat = 300
+    @State var xPos2: CGFloat = 200
+    @State var yPos2: CGFloat = 600
+    
     var body: some View {
         
         
@@ -45,10 +50,14 @@ struct AltHomescreen: View {
                 LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
                     
+                                
+                
                 VStack {
-                    
+                 
+                        
                     globestart()
                         .padding()
+                    
                     
                     Text("WORLD QUIZ")
                         .font(.system(size: 30))
@@ -56,6 +65,8 @@ struct AltHomescreen: View {
                         .underline()
                         .foregroundColor(.random)
                         .padding()
+                    
+                        
                     HStack{
                         
                         Button {

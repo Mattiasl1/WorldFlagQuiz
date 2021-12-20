@@ -321,6 +321,9 @@ struct AfricaQuiz: View {
         } else if gameRoundTimer < 1 {
             endroundtimeout.toggle()
         }
+        if RoundTimer >= 32 {
+           RoundTimer = 30
+        }
         
     }
 
