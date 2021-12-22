@@ -7,7 +7,8 @@
 
 import SwiftUI
 import AVFoundation
-
+import Firebase
+import SpriteKit
 
 
 
@@ -32,9 +33,16 @@ struct chooseQuiz: View {
         
         
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            
+            LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+                .overlay(SpriteView(scene: snowFall(), options: [.allowsTransparency]))
                 .edgesIgnoringSafeArea(.all)
             
+            /*
+            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+            */
             
             
             
@@ -81,8 +89,26 @@ struct chooseQuiz: View {
                 Spacer()
                 
                 VStack{
+                    NavigationLink(destination: AllQuiz()) {Text(VN)
+                            .font(.largeTitle)
+                            .fontWeight(.semibold)
+                            .shadow(color: .black, radius: 3, x: 0, y: 0)
+                            .padding(.all)
+                            .foregroundColor(.white)
+                            .frame(width: 300, height: 150)
+                            .background(Color.blue)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.black, lineWidth: 8)
+                            )
+                            .cornerRadius(10)
+                            .padding(.bottom, 10.0)
+                            .shadow(color: .black, radius: 6, x: 0, y: 0)
+                    }
                     
                     HStack{
+                        
+                        
                     NavigationLink(destination: EuropeQuiz())
                     
                     
@@ -163,22 +189,7 @@ struct chooseQuiz: View {
                     }
                     }
                     
-                    NavigationLink(destination: AllQuiz()) {Text(VN)
-                            .font(.largeTitle)
-                            .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
-                            .padding(.all)
-                            .foregroundColor(.white)
-                            .frame(width: 300, height: 150)
-                            .background(Color.blue)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 8)
-                            )
-                            .cornerRadius(10)
-                            .padding(.bottom, 10.0)
-                            .shadow(color: .black, radius: 6, x: 0, y: 0)
-                    }
+                    
                     
                 }
                 
@@ -189,9 +200,22 @@ struct chooseQuiz: View {
         }.onAppear(perform: {
             
             doLang()
-            
+            letsTrackQuiz()
         })
     }
+    func letsTrackQuiz() {
+        Analytics.logEvent(AnalyticsEventScreenView,
+                           parameters: [AnalyticsParameterScreenName: "Choose quiz"])
+        /*
+         AnalyticsParameterItemName: AS,
+         AnalyticsParameterItemName: AF,
+         AnalyticsParameterItemName: AM,
+         AnalyticsParameterItemName: VN,
+         */
+       // Analytics.logEvent("test", parameters: nil)
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: nil)
+    }
+    
     
     func doLang()
     {
@@ -217,6 +241,22 @@ struct chooseQuiz: View {
             AM = "Amerika"
             VN = "Världen"
             headertext = "Välj Quiz"
+        }
+    }
+    
+    class snowFall: SKScene{
+        override func sceneDidLoad() {
+            
+            size = UIScreen.main.bounds.size
+            scaleMode = .resizeFill
+            
+            anchorPoint = CGPoint(x: 0.5, y: 1)
+            
+            backgroundColor = .clear
+                
+            
+            let node = SKEmitterNode (fileNamed: "snowFall.sks")!
+            addChild(node)
         }
     }
 }

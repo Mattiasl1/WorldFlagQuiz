@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct AllImageList: View {
     
@@ -43,28 +44,35 @@ struct CountryListView: View {
         
         
         
-        VStack{
-            Text(titleCountries)
-                .font(.largeTitle)
-            List(CountryNameSWE, id: \.self) { country in
-                HStack{
-                    Image(country)
-                        .resizable()
-                        .frame(width: 50, height: 30)
-                    Text(country)
+        ZStack {
+            
+            LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+            VStack{
+                Text(titleCountries)
+                    .font(.largeTitle)
+                List(CountryNameSWE, id: \.self) { country in
+                    HStack{
+                        Image(country)
+                            .resizable()
+                            .frame(width: 50, height: 30)
+                        Text(country)
+                        
+                        
+                    }
+                    
+                    
                     
                     
                 }
+            }.onAppear(perform: {
+                Analytics.logEvent(AnalyticsEventScreenView,
+                                   parameters: [AnalyticsParameterScreenName: "Country list"])
+
+                doLang()
                 
-                
-                
-                
-            }
-        }.onAppear(perform: {
-            
-            doLang()
-            
         })
+        }
         
         
                 

@@ -13,6 +13,8 @@
 
 import SwiftUI
 import AVFoundation
+import Firebase
+import SpriteKit
 
 extension ShapeStyle where Self == Color {
     static var random: Color {
@@ -38,6 +40,7 @@ struct AltHomescreen: View {
     @State var yPos1: CGFloat = 300
     @State var xPos2: CGFloat = 200
     @State var yPos2: CGFloat = 600
+    @State var hejhej = "tjena"
     
     var body: some View {
         
@@ -45,15 +48,31 @@ struct AltHomescreen: View {
         NavigationView{
             
             
+                
             
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                
+                
+                LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
+                    .overlay(SpriteView(scene: snowFall(), options: [.allowsTransparency]))
+                    .edgesIgnoringSafeArea(.all)
+               
+                
+                //Normal theme
+                /*
+                 LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                     .edgesIgnoringSafeArea(.all)
+                 */
+                    
+                    
+                
+               
                     
                                 
                 
                 VStack {
-                 
+                    
                         
                     globestart()
                         .padding()
@@ -63,11 +82,13 @@ struct AltHomescreen: View {
                         .font(.system(size: 30))
                         .fontWeight(.bold)
                         .underline()
-                        .foregroundColor(.random)
+                        .foregroundColor(.white)
+                      //  .foregroundColor(.random)
                         .padding()
                     
                         
                     HStack{
+                        
                         
                         Button {
                             
@@ -197,13 +218,23 @@ struct AltHomescreen: View {
             
             
         }.onAppear(perform: {
-            
+            letsTrack()
             doLang()
             
         })
         
     }
-    
+    func letsTrack() {
+       /* Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+          AnalyticsParameterItemID: "id-\(title!)",
+          AnalyticsParameterItemName: title!,
+          AnalyticsParameterContentType: "cont",
+        ])
+        */
+       // Analytics.logEvent("test", parameters: nil)
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [AnalyticsParameterScreenName: "Startscreen"])
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: nil)
+    }
     
     func doLang()
     {
@@ -232,6 +263,22 @@ struct AltHomescreen: View {
             return geometry.size.width < geometry.size.height ? 0.5 : -0.5
         }
         return 0
+    }
+    
+    class snowFall: SKScene{
+        override func sceneDidLoad() {
+            
+            size = UIScreen.main.bounds.size
+            scaleMode = .resizeFill
+            
+            anchorPoint = CGPoint(x: 0.5, y: 1)
+            
+            backgroundColor = .clear
+                
+            
+            let node = SKEmitterNode (fileNamed: "snowFall.sks")!
+            addChild(node)
+        }
     }
     
 }

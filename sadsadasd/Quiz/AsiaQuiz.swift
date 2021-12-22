@@ -7,6 +7,8 @@
 
 import SwiftUI
 import AVFoundation
+import Firebase
+import SpriteKit
 
 struct AsiaImageQuiz: View {
     
@@ -57,7 +59,7 @@ struct AsiaQuiz: View {
     @State var gameRoundTimer : Int = 30
     @State var StartGameTimer = false
     @State var endroundtimeout = false
-    @State var minusTime = -200
+    @State var minusTime = -500
     @State var plusTime = +1
     @State var showWrong = false
     @State var isNavigationBarHidden: Bool = true
@@ -66,8 +68,16 @@ struct AsiaQuiz: View {
     
     var body: some View {
         ZStack{
+            
+            LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+                .overlay(SpriteView(scene: snowFall(), options: [.allowsTransparency]))
+                .edgesIgnoringSafeArea(.all)
+            
+            /*
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+             */
         VStack {
             
             if (StartRound) {
@@ -199,7 +209,7 @@ struct AsiaQuiz: View {
             } else if(showWrong)
             {
                 
-                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.red).font(.system(size: 40)
+                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 40)
                                                                                                                     
                 )}
         
@@ -211,7 +221,9 @@ struct AsiaQuiz: View {
             StartRound.toggle()
             CountToStart()
             animationAmount = 1
-            
+            Analytics.logEvent(AnalyticsEventScreenView,
+                               parameters: [AnalyticsParameterScreenName: "Asia quiz"])
+
             self.isNavigationBarHidden = true
             
             
@@ -275,7 +287,7 @@ struct AsiaQuiz: View {
             
             
         } else if number != correctIndexAnswer {
-            gameScoreAS = gameScoreAS - 200
+            gameScoreAS = gameScoreAS - 500
             showWrong = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -369,6 +381,21 @@ struct AsiaQuiz: View {
             }
         }
         
+    }
+    class snowFall: SKScene{
+        override func sceneDidLoad() {
+            
+            size = UIScreen.main.bounds.size
+            scaleMode = .resizeFill
+            
+            anchorPoint = CGPoint(x: 0.5, y: 1)
+            
+            backgroundColor = .clear
+                
+            
+            let node = SKEmitterNode (fileNamed: "snowFall.sks")!
+            addChild(node)
+        }
     }
     
 }

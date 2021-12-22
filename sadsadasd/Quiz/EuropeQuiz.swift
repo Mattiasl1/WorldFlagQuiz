@@ -7,7 +7,8 @@
 
 import SwiftUI
 import AVFoundation
-
+import Firebase
+import SpriteKit
 
 
 struct EuropeImageQuiz: View {
@@ -85,7 +86,7 @@ struct EuropeQuiz: View {
     @State var gameRoundTimer : Int = 30
     @State var StartGameTimer = false
     @State var endroundtimeout = false
-    @State var minusTime = -200
+    @State var minusTime = -500
     @State var plusTime = +1
     
     
@@ -99,9 +100,16 @@ struct EuropeQuiz: View {
         
         
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            
+            LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+                .overlay(SpriteView(scene: snowFall(), options: [.allowsTransparency]))
                 .edgesIgnoringSafeArea(.all)
             
+            /*
+            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+            */
             
             VStack {
                 
@@ -243,7 +251,7 @@ struct EuropeQuiz: View {
             } else if(showWrong)
             {
                 
-                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.red).font(.system(size: 40)
+                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 40)
                                                                                                                     
                 )}
             
@@ -256,7 +264,8 @@ struct EuropeQuiz: View {
             StartRound.toggle()
             CountToStart()
             animationAmount = 1
-            
+            Analytics.logEvent(AnalyticsEventScreenView,
+                               parameters: [AnalyticsParameterScreenName: "Europe quiz"])
             self.isNavigationBarHidden = true
             
             
@@ -321,7 +330,7 @@ struct EuropeQuiz: View {
             
             
         } else if number != correctIndexAnswer {
-            gameScoreEU = gameScoreEU - 200
+            gameScoreEU = gameScoreEU - 500
             showWrong = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -427,6 +436,24 @@ struct EuropeQuiz: View {
     func gametimeleft() {
         if RoundTimer == 0 {
             gameOver()
+        }
+    }
+    
+    
+    
+    class snowFall: SKScene{
+        override func sceneDidLoad() {
+            
+            size = UIScreen.main.bounds.size
+            scaleMode = .resizeFill
+            
+            anchorPoint = CGPoint(x: 0.5, y: 1)
+            
+            backgroundColor = .clear
+                
+            
+            let node = SKEmitterNode (fileNamed: "snowFall.sks")!
+            addChild(node)
         }
     }
     

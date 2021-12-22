@@ -13,8 +13,7 @@ struct AlertViewOne: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(.all)
+            
             VStack(alignment: .center, spacing: 0) {
                 
                 Text("alert")
