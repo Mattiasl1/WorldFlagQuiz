@@ -53,9 +53,7 @@ struct AltHomescreen: View {
             ZStack {
                 
                 
-                LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                    .edgesIgnoringSafeArea(.all)
-                    .overlay(SpriteView(scene: snowFall(), options: [.allowsTransparency]))
+                LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
                
                 
@@ -65,7 +63,13 @@ struct AltHomescreen: View {
                      .edgesIgnoringSafeArea(.all)
                  */
                     
-                    
+                    // Christmas theme
+                /*
+                 LinearGradient(gradient: Gradient(colors: [.white, .red, .red]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                     .edgesIgnoringSafeArea(.all)
+                     .overlay(SpriteView(scene: snowFall(), options: [.allowsTransparency]))
+                     .edgesIgnoringSafeArea(.all)
+                 */
                 
                
                     
