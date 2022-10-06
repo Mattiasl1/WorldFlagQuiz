@@ -14,6 +14,7 @@ struct EuropeScore: View {
     @State var eupoints = UserDefaults.standard.integer(forKey: "europe")
     @State var recordText = "All time high"
     @State var partOfW = "Europe"
+    @State var lista = ["hej", "hej2", "hej3"]
     
     var body: some View {
         
@@ -21,46 +22,43 @@ struct EuropeScore: View {
         
         ZStack{
             
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-           // LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
-             //   .edgesIgnoringSafeArea(.all)
+                .opacity(0.5)
             
             
             VStack{
-                
-                Spacer()
-                Text(recordText)
+                Text("Highscore")
                     .font(.title)
-                    .fontWeight(.black)
                     .foregroundColor(.white)
-                    .shadow(radius: 10)
-                    .shadow(color: .black, radius: 4, x: 0, y: 0)
-                Spacer()
-                //gamescoreEU
+                    .shadow(radius: 1)
+                    .padding()
+                List(lista, id: \.self) { list in
+                    HStack{
+                        
+                        Text("Usernamehere")
+                        Spacer()
+                        Text("Points: " + "70")
+                        
+                            
+                        
+                        
+                    }.scaledToFit()
+                }
+               
+                HStack {
+                    Text(recordText)
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .shadow(radius: 1)
+                    
+                    Text(String(eupoints))
+                        .font(.system(size: 30))
+                        .foregroundColor(.white)
+                        .shadow(radius: 1)
+                }.padding()
                 
-                Text(String(eupoints))
-                    .font(.system(size: 60))
-                    .fontWeight(.black)
-                    .foregroundColor(.white)
-                    .shadow(radius: 10)
-                    .shadow(color: .green, radius: 4, x: 0, y: 0)
-                
-                
-                
-                
-                Spacer()
-                Text(partOfW)
-                    .font(.system(size: 80))
-                    .fontWeight(.black)
-                    .foregroundColor(.white)
-                    .underline(true, color: .green)
-                
-                
-                    .shadow(color: .black, radius: 4, x: 0, y: 0)
-                
-                
-                Spacer()
+                    
             }
             
         }.onAppear(perform: {
@@ -86,10 +84,10 @@ struct EuropeScore: View {
         
         if(lang == "en")
         {
-            recordText = "All time high"
+            recordText = "Best score:"
             partOfW = "Europe"
         } else {
-            recordText = "Bästa score"
+            recordText = "bästa score:"
             partOfW = "Europa"
         }
     }

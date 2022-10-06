@@ -16,11 +16,11 @@ struct LeaderBoardView: View {
     
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(.all)
             
-          //  LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            //    .edgesIgnoringSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [.white, .white, .white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                .edgesIgnoringSafeArea(.all)
+                .opacity(0.5)
+            
             
         TabView {
             EuropeScore()
@@ -32,7 +32,7 @@ struct LeaderBoardView: View {
         
         .tabViewStyle(.page(indexDisplayMode: .automatic))
                 .ignoresSafeArea()
-                .background(.black)
+                
             
                 
         }.onAppear(perform: {
@@ -41,6 +41,7 @@ struct LeaderBoardView: View {
         })
         
     }
+    
 }
 
 struct LeaderBoardView_Previews: PreviewProvider {

@@ -101,8 +101,9 @@ struct EuropeQuiz: View {
         
         ZStack{
             
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+                .opacity(0.5)
             
             /*
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -113,24 +114,24 @@ struct EuropeQuiz: View {
                 
                 if (StartRound) {
                     Text(europeLang)
-                        .font(.title2)
+                        .font(.title)
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
                     
                         .foregroundColor(Color.white)
-                        .shadow(color: .black, radius: 4, x: 0, y: 0)
+                        .shadow(color: .black, radius: 1, x: 0, y: 0)
                 }
                 
                 if(StartGameTimer) {
-                    Text("Timeleft: \(RoundTimer)")
-                        .foregroundColor(Color.white).font(.title2).shadow(color: .black, radius: 6, x: 0, y: 0)
+                    Text("Time: \(RoundTimer)")
+                        .foregroundColor(Color.white).font(.title)
                   
                 }
                 
                 
                
                 EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
+                    
                 
                 
                 
@@ -138,10 +139,12 @@ struct EuropeQuiz: View {
                 //timerview()
                 HStack {
                     Text("Score:")
+                        .foregroundColor(Color.white)
                         .fontWeight(.bold)
                         .font(.title)
                     
                     Text("\(String(gameScoreEU))")
+                        .foregroundColor(Color.white)
                         .fontWeight(.bold)
                         .font(.title)
                 }
@@ -188,21 +191,19 @@ struct EuropeQuiz: View {
                     })
                     {
                         Text(self.CountryName[number])
-                            .font(.largeTitle)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
+                            .padding()
                             .foregroundColor(.white)
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 350, height: 70)
-                            .background(Color.green)
-                            .cornerRadius(10)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 5)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(10)
+                            .cornerRadius(5)
                             .padding(.bottom, 10.0)
-                            .shadow(color: .black, radius: 4, x: 0, y: 0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                         
                     }
                     

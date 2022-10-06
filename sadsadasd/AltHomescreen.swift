@@ -16,18 +16,10 @@ import AVFoundation
 import Firebase
 import SpriteKit
 
-extension ShapeStyle where Self == Color {
-    static var random: Color {
-        Color(
-            red: .random(in: 0...1),
-            green: .random(in: 0...1),
-            blue: .random(in: 0...1)
-            
-        )
-    }
-}
+
 
 struct AltHomescreen: View {
+    @State private var showingProfileSheet = false
     @State var animationAmount = 1.0
     @State var onClick = false
     @State var countryList = "LÄNDER"
@@ -40,7 +32,9 @@ struct AltHomescreen: View {
     @State var yPos1: CGFloat = 300
     @State var xPos2: CGFloat = 200
     @State var yPos2: CGFloat = 600
-    @State var hejhej = "tjena"
+    @State var playerName = "Username"
+    @State var choosePlayername = "Player name"
+    @State var saveName = "Save"
     
     var body: some View {
         
@@ -53,8 +47,9 @@ struct AltHomescreen: View {
             ZStack {
                 
                 
-                LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .edgesIgnoringSafeArea(.all)
+                    .opacity(0.5)
                
                 
                 //Normal theme
@@ -82,59 +77,17 @@ struct AltHomescreen: View {
                         .padding()
                     
                     
+
                     Text("WORLD QUIZ")
-                        .font(.system(size: 30))
+                        .font(MyFont.title30)
                         .fontWeight(.bold)
-                        .underline()
                         .foregroundColor(.white)
+                    
                       //  .foregroundColor(.random)
                         .padding()
                     
-                        
-                    HStack{
-                        
-                        
-                        Button {
-                            
-                            UserDefaults.standard.set("sv", forKey: "lang")
-                            doLang()
-                            
-                            countryList = "LÄNDER"
-                            print("Now Swedish")
-                            AudioServicesPlaySystemSound(1306)
-                        } label: {
-                            
-                            Image("SWEliten").resizable()
-                                .frame(width: 60, height: 40)
-                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 2)
-                                .padding(.leading, 67.0)
-                                .brightness(0.1)
-                                .shadow(color: .black, radius: 4, x: 0, y: 0)
-                                
-                            
-                        }
-                        Spacer()
-                        
-                        Button {
-                            UserDefaults.standard.set("en", forKey: "lang")
-                            doLang()
-                            
-                            countryList = "COUNTRIES"
-                            print("Now English")
-                            AudioServicesPlaySystemSound(1306)
-                        } label: {
-                            Image("ENGliten").resizable()
-                                .frame(width: 60, height: 40)
-                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 2)
-                                .padding(.trailing, 67.0)
-                                .brightness(0.1)
-                                .shadow(color: .black, radius: 4, x: 0, y: 0)
-                                
-                            
-                        }
-                        
-                        
-                    }
+                   
+                    
                     .padding()
                     
                     
@@ -146,24 +99,38 @@ struct AltHomescreen: View {
                     VStack{
                         
                         
+                        NavigationLink(destination: ProfileView())
+                        {
+                            VStack{
+                                Image(systemName: "person.circle")
+                                    .font(.system(size: 50))
+                                    .foregroundColor(Color.black)
+                                Text("Profile")
+                                    .font(MyFont.title14)
+                            }
+                            
+                                
+                                
+                        }.padding(.bottom, 20)
+                        
                         NavigationLink(destination: chooseQuiz())
                         {
                             
                             
                             Text(letsPlay)
-                                .font(.largeTitle)
+                                .font(MyFont.title24)
                                 .fontWeight(.semibold)
                                 .padding()
                                 .foregroundColor(.white)
-                                .frame(width: 300, height: 70)
-                                .background(Color.green)
+                                .frame(width: 250, height: 50)
+                                .background(Color.gray)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 30)
-                                        .stroke(Color.black, lineWidth: 5)
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.black, lineWidth: 2)
                                 )
-                                .cornerRadius(30)
+                                .cornerRadius(5)
                                 .padding(.bottom, 10.0)
-                                .shadow(color: .black, radius: 4, x: 0, y: 0)
+                                .shadow(color: .black, radius: 2, x: 0, y: 0)
                                 
                             
                             
@@ -174,19 +141,19 @@ struct AltHomescreen: View {
                             
                             
                             Text(highScore)
-                                .font(.largeTitle)
+                                .font(MyFont.title24)
                                 .fontWeight(.semibold)
                                 .padding()
                                 .foregroundColor(.white)
-                                .frame(width: 300, height: 70)
-                                .background(Color.yellow)
+                                .frame(width: 250, height: 50)
+                                .background(Color.gray)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 30)
-                                        .stroke(Color.black, lineWidth: 5)
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color.black, lineWidth: 2)
                                 )
-                                .cornerRadius(30)
+                                .cornerRadius(5)
                                 .padding(.bottom, 10.0)
-                                .shadow(color: .black, radius: 4, x: 0, y: 0)
+                                .shadow(color: .black, radius: 2, x: 0, y: 0)
                             
                             
                         }
@@ -199,20 +166,22 @@ struct AltHomescreen: View {
                         
                         
                         Text(countryList)
-                            .font(.largeTitle)
+                            .font(MyFont.title24)
                             .fontWeight(.semibold)
                             .padding()
                             .foregroundColor(.white)
-                            .frame(width: 300, height: 70)
-                            .background(Color.brown)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 30)
-                                    .stroke(Color.black, lineWidth: 5)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(30)
+                            .cornerRadius(5)
                             .padding(.bottom, 10.0)
-                            .shadow(color: .black, radius: 4, x: 0, y: 0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                     }
+                    
+                    
                     
                 }
             }
@@ -254,10 +223,14 @@ struct AltHomescreen: View {
             letsPlay = "PLAY"
             highScore = "HIGHSCORE"
             countryList = "COUNTRIES"
+            choosePlayername = "Username"
+            saveName = "Save"
         } else {
             letsPlay = "SPELA"
             highScore = "TOPPLISTA"
             countryList = "LÄNDER"
+            choosePlayername = "Användarenamn"
+            saveName = "Spara"
         }
     }
     
@@ -294,46 +267,16 @@ struct AltHomescreen_Previews: PreviewProvider {
     }
 }
 
-/*
- NavigationLink(destination: CountryListView())
- {
- 
- 
- Text(countryList)
- .font(.largeTitle)
- .fontWeight(.semibold)
- .padding()
- .foregroundColor(.white)
- .frame(width: 300, height: 70)
- .background(Color("MyBlue"))
- .overlay(
- RoundedRectangle(cornerRadius: 30)
- .stroke(Color.black, lineWidth: 5)
- )
- .cornerRadius(30)
- 
- 
- }
- */
 
 
-/*
- Button(action: {
- onClick = true
- }) {
- Text(countryList)
- .font(.largeTitle)
- .fontWeight(.semibold)
- .padding()
- .foregroundColor(.white)
- .frame(width: 300, height: 70)
- .background(Color("MyBlue"))
- .overlay(
- RoundedRectangle(cornerRadius: 30)
- .stroke(Color.black, lineWidth: 5)
- )
- .cornerRadius(30)
- }.fullScreenCover(isPresented: $onClick) {
- CountryListView()
- }
- */
+struct ProfileView: View {
+    
+    
+    var body: some View {
+        VStack{
+            Text("Profile")
+            
+        }
+    }
+}
+

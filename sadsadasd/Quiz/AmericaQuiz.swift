@@ -68,8 +68,9 @@ struct AmericaQuiz: View {
     var body: some View {
         ZStack{
             
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+                .opacity(0.5)
             
             /*
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -90,14 +91,14 @@ struct AmericaQuiz: View {
                 
                 if(StartGameTimer) {
                     Text("Timeleft: \(RoundTimer)")
-                        .foregroundColor(Color.white).font(.title2).shadow(color: .black, radius: 6, x: 0, y: 0)
+                        .foregroundColor(Color.black).font(.title2)
                   
                 }
                     
                 
                 
                 EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
+                    
                 
                 
                 
@@ -172,21 +173,19 @@ struct AmericaQuiz: View {
                     })
                     {
                         Text(self.CountryName[number])
-                            .font(.largeTitle)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
+                            .padding()
                             .foregroundColor(.white)
-                            
-                            .frame(width: 350, height: 70)
-                            .background(Color.red)
-                            .cornerRadius(10)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 5)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(10)
+                            .cornerRadius(5)
                             .padding(.bottom, 10.0)
-                            .shadow(color: .black, radius: 4, x: 0, y: 0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
      
                     }
                     

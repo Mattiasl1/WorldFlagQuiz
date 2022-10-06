@@ -40,17 +40,16 @@ struct CountryListView: View {
     
     var body: some View {
         
-        
-        
-        
-        
         ZStack {
             
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+                .opacity(0.5)
             VStack{
                 Text(titleCountries)
-                    .font(.largeTitle)
+                    .foregroundColor(Color.white)
+                    .font(.title)
+                    .padding(.top, 50)
                 List(CountryNameSWE, id: \.self) { country in
                     HStack{
                         Image(country)
@@ -59,12 +58,10 @@ struct CountryListView: View {
                         Text(country)
                         
                         
-                    }
-                    
-                    
-                    
-                    
-                }
+                    }.scaledToFit()
+                 }
+                
+                
             }.onAppear(perform: {
                 Analytics.logEvent(AnalyticsEventScreenView,
                                    parameters: [AnalyticsParameterScreenName: "Country list"])

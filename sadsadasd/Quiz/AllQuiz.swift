@@ -67,8 +67,9 @@ struct AllQuiz: View {
     
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+                .opacity(0.5)
             
             /*
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -89,14 +90,14 @@ struct AllQuiz: View {
                 
                 if(StartGameTimer) {
                     Text("Timeleft: \(RoundTimer)")
-                        .foregroundColor(Color.white).font(.title2).shadow(color: .black, radius: 6, x: 0, y: 0)
+                        .foregroundColor(Color.white).font(.title).fontWeight(.semibold)
                   
                 }
                     
                 
                 
                 EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: 4)
+                    
                 
                 
                
@@ -104,12 +105,14 @@ struct AllQuiz: View {
                 //timerview()
                 HStack {
                     Text("Score:")
-                        .fontWeight(.bold)
+                        .fontWeight(.semibold)
                         .font(.title)
+                        .foregroundColor(Color.white)
                     
                     Text("\(String(gameScoreALL))")
-                        .fontWeight(.bold)
+                        .fontWeight(.semibold)
                         .font(.title)
+                        .foregroundColor(Color.white)
                 }
                 
                 
@@ -153,6 +156,7 @@ struct AllQuiz: View {
                     Text("Points: \(timeRemaining)")
                         .padding()
                     .font(.title2)
+                    .foregroundColor(Color.white)
                     
                     
                 }
@@ -171,21 +175,19 @@ struct AllQuiz: View {
                     })
                     {
                         Text(self.CountryName[number])
-                            .font(.largeTitle)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
+                            .padding()
                             .foregroundColor(.white)
-                            
-                            .frame(width: 350, height: 70)
-                            .background(Color.blue)
-                            .cornerRadius(10)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 5)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(10)
+                            .cornerRadius(5)
                             .padding(.bottom, 10.0)
-                            .shadow(color: .black, radius: 4, x: 0, y: 0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
      
                     }
                     
@@ -215,15 +217,15 @@ struct AllQuiz: View {
             if(showCorrect)
             {
                 VStack{
-                Text("+\(String(showALLscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 80))
-                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                Text("+\(String(showALLscore))").fontWeight(.semibold).opacity(1).foregroundColor(Color.white).font(.system(size: 60))
+                    .shadow(color: .black, radius: 2, x: 0, y: 0)
                     
                 }
                 
             } else if(showWrong)
             {
                 
-                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 40)
+                Text("Score  \(String(minusTime))").fontWeight(.semibold).opacity(1).foregroundColor(Color.white).font(.system(size: 40)
                                                                                                                     
                 )}
                         

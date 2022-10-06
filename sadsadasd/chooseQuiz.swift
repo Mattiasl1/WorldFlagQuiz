@@ -34,8 +34,9 @@ struct chooseQuiz: View {
         
         ZStack{
             
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+                .opacity(0.5)
             
             /*
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -48,83 +49,51 @@ struct chooseQuiz: View {
             VStack{
                 Text(headertext)
                     .foregroundColor(.white)
-                    .padding()
-                    .font(.largeTitle)
-                    .shadow(color: .black, radius: 4, x: 0, y: 0)
+                    .padding(.bottom, 20)
+                    .fontWeight(.semibold)
+                    .font(.title)
+                    .shadow(color: .black, radius: 1, x: 0, y: 0)
                 
                 
                 
-                
-                Spacer()
-                
-                /*
-                 HStack{
-                 Text("Premium:")
-                 .foregroundColor(.white)
-                 .padding(.leading)
-                 .font(.title)
-                 Image(systemName: bildbild)
-                 .font(.title)
-                 .foregroundColor(.yellow)
-                 Spacer()
-                 Button(action: {
-                 bildbild = "star.fill"
-                 
-                 }) {
-                 Text("Bli Premium")
-                 .foregroundColor(.black)
-                 .frame(width: 100, height: 40)
-                 .background(.mint)
-                 .padding(.horizontal)
-                 
-                 
-                 }
-                 }
-                 */
-                
-                
-                
-                Spacer()
                 
                 VStack{
                     NavigationLink(destination: AllQuiz()) {Text(VN)
-                            .font(.largeTitle)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
-                            .padding(.all)
+                            .padding()
                             .foregroundColor(.white)
-                            .frame(width: 300, height: 150)
-                            .background(Color.blue)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 8)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(10)
+                            .cornerRadius(5)
                             .padding(.bottom, 10.0)
-                            .shadow(color: .black, radius: 6, x: 0, y: 0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                     }
                     
-                    HStack{
+                    
                         
                         
                     NavigationLink(destination: EuropeQuiz())
                     
                     
                     {Text(EU)
-                            .font(.largeTitle)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
-                            .padding(.all)
+                            .padding()
                             .foregroundColor(.white)
-                            .frame(width: 170, height: 150)
-                            .background(Color.green)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 8)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(10)
-                            .padding(.bottom, 30.0)
-                            .shadow(color: .black, radius: 6, x: 0, y: 0)
+                            .cornerRadius(5)
+                            .padding(.bottom, 10.0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                         
                         
                         
@@ -133,65 +102,62 @@ struct chooseQuiz: View {
                     
                     
                     NavigationLink(destination: AsiaQuiz()) {Text(AS)
-                            .font(.largeTitle)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
-                            .padding(.all)
+                            .padding()
                             .foregroundColor(.white)
-                            .frame(width: 170, height: 150)
-                            .background(Color.purple)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 8)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(10)
-                            .padding(.bottom, 30.0)
-                            .shadow(color: .black, radius: 6, x: 0, y: 0)
+                            .cornerRadius(5)
+                            .padding(.bottom, 10.0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                     }
-                    }
-                    HStack{
+                    
+                    
                     NavigationLink(destination: AfricaQuiz()) {Text(AF)
-                            .font(.largeTitle)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
-                            .padding(.all)
+                            .padding()
                             .foregroundColor(.white)
-                            .frame(width: 170, height: 150)
-                            .background(Color.orange)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 8)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(10)
-                            .padding(.bottom, 30.0)
-                            .shadow(color: .black, radius: 6, x: 0, y: 0)
+                            .cornerRadius(5)
+                            .padding(.bottom, 10.0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                     }
                     
                     
                     NavigationLink(destination: AmericaQuiz()) {Text(AM)
-                            .font(.largeTitle)
+                            .font(.title2)
                             .fontWeight(.semibold)
-                            .shadow(color: .black, radius: 3, x: 0, y: 0)
-                            .padding(.all)
+                            .padding()
                             .foregroundColor(.white)
-                            .frame(width: 170, height: 150)
-                            .background(Color.red)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 8)
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
                             )
-                            .cornerRadius(10)
-                            .padding(.bottom, 30.0)
-                            .shadow(color: .black, radius: 6, x: 0, y: 0)
+                            .cornerRadius(5)
+                            .padding(.bottom, 10.0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                         
                     }
-                    }
+                    
                     
                     
                     
                 }
                 
-                Spacer()
+                
                 
             }
             

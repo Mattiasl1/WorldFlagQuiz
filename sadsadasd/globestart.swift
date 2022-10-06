@@ -17,6 +17,7 @@ struct globestart: View {
     var body: some View {
         Image("testworldmap")
             .resizable(resizingMode: .stretch)
+            .frame(maxWidth: .infinity, minHeight: 150, idealHeight: 200, maxHeight: 200, alignment: .center)
             .aspectRatio(contentMode: .fit)
         
             

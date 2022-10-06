@@ -16,37 +16,27 @@ struct AmericaScore: View {
     
     var body: some View {
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
+                .opacity(0.5)
            // LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
              //   .edgesIgnoringSafeArea(.all)
             
             
             VStack{
-                Spacer()
-                //gamescoreAM
-                Text(recordText)
-                    .font(.title)
-                    .fontWeight(.black)
-                    .foregroundColor(.white)
-                    .shadow(color: .black, radius: 4, x: 0, y: 0)
-                Spacer()
-                
-                
-                Text(String(americapoints))
-                    .font(.system(size: 60))
-                    .fontWeight(.black)
-                    .foregroundColor(.white)
-                    .shadow(color: .red, radius: 4, x: 0, y: 0)
-                
-                Spacer()
-                Text(partOfW)
-                    .font(.system(size: 80))
-                    .fontWeight(.black)
-                    .foregroundColor(.white)
-                    .underline(true, color: .red)
-                    .shadow(color: .black, radius: 4, x: 0, y: 0)
-                Spacer()
+               
+                HStack {
+                    Text(recordText)
+                        .font(.title)
+                        .foregroundColor(.white)
+                    .shadow(radius: 1)
+                    
+                    Text(String(americapoints))
+                        .font(.system(size: 30))
+                        .foregroundColor(.white)
+                        .shadow(radius: 10)
+                }
+                    
             }
             
         }.onAppear(perform: {
