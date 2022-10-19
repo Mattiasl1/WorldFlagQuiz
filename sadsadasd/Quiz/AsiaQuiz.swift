@@ -32,7 +32,7 @@ struct AsiaQuiz: View {
     @State private var TimeToStart = 3
     let Starttimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    @State private var RoundTimer = 32
+    @State private var RoundTimer = 42
     let RoundtimerCounter = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State private var correctIndexAnswer = 0
@@ -56,7 +56,7 @@ struct AsiaQuiz: View {
     @State private var showendOfGameAlert = false
     @State var endOfTextENG = "Total points!"
     @State var isVisible = false
-    @State var gameRoundTimer : Int = 30
+    @State var gameRoundTimer : Int = 40
     @State var StartGameTimer = false
     @State var endroundtimeout = false
     @State var minusTime = -500
@@ -67,153 +67,157 @@ struct AsiaQuiz: View {
     
     
     var body: some View {
+        
         ZStack{
             
             LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-                .opacity(0.5)
+                .opacity(0.2)
             
             /*
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-             */
-        VStack {
+            */
             
-            if (StartRound) {
-                Text(AsiaLang)
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .padding(.bottom, 5)
+            VStack {
                 
-                    .foregroundColor(Color.white)
-                    .shadow(color: .black, radius: 1, x: 0, y: 0)
-            }
-            
-            if(StartGameTimer) {
-                Text("Timeleft: \(RoundTimer)")
-                    .foregroundColor(Color.black).font(.title2)
-              
-            }
-            
-            
-            EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
+                if (StartRound) {
+                    Text(AsiaLang)
+                        .font(MyFont.title18)
+                        .padding(.bottom, 5)
+                        .foregroundColor(Color.black)
+                        
+                }
+                
+                if(StartGameTimer) {
+                    Text("Time:  \(RoundTimer)")
+                        .foregroundColor(Color.black).font(MyFont.title18)
+                  
+                }
                 
                 
-            
-            //timerview()
-            HStack {
-                Text("Score:")
-                    .fontWeight(.bold)
-                    .font(.title)
-
-                Text("\(String(gameScoreAS))")
-                    .fontWeight(.bold)
-                    .font(.title)
-            }
-            
-            
-            
-            
-            .alert(endOfGameText, isPresented: $showendOfGameAlert) {
-                Button(playAgain, role: .cancel) {
-                    let oldscore = UserDefaults.standard.integer(forKey: "asia")
+               
+                EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
                     
-                    if(gameScoreAS > oldscore)
+                
+                
+                
+                
+                //timerview()
+                HStack {
+                    Text("Score:")
+                        .foregroundColor(Color.black)
+                        .font(MyFont.title18)
+                    
+                    Text("\(String(gameScoreAS))")
+                        .foregroundColor(Color.black)
+                        .font(MyFont.title18)
+                }
+                
+                
+                
+                .alert(endOfGameText, isPresented: $showendOfGameAlert) {
+                    Button(playAgain, role: .cancel) {
+                        let oldscore = UserDefaults.standard.integer(forKey: "asia")
+                        
+                        if(gameScoreAS > oldscore)
+                        {
+                            UserDefaults.standard.set(gameScoreAS, forKey: "asia")
+                            
+                        }
+                        
+                        self.resetGame()
+                    }
+                }
+                
+                
+                
+                HStack {
+                    Text("Points: \(timeRemaining)")
+                        .padding()
+                        .font(MyFont.title18)
+                    
+                    
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                ForEach(0 ..< 3) { number in
+                    Button(action: {
+                        self.CountryTapped(number)
+                        
+                    })
                     {
-                        UserDefaults.standard.set(gameScoreAS, forKey: "asia")
+                        Text(self.CountryName[number])
+                            .font(MyFont.title18)
+                            .padding()
+                            .foregroundColor(.white)
+                            .frame(width: 250, height: 50)
+                            .background(Color.gray)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.black, lineWidth: 2)
+                            )
+                            .cornerRadius(5)
+                            .padding(.bottom, 10.0)
+                            .shadow(color: .black, radius: 2, x: 0, y: 0)
                         
                     }
                     
-                    self.resetGame()
-                }
-            }
-            /*
-             .alert(isPresented: $endOfGame) {
-                 Alert(title: Text(endOfGameText), message: Text("You got a total of \(gameScoreAS) points!"), dismissButton: .default(Text(playAgain)) {
-                     
-                     // Spara poäng
-                     let oldscore = UserDefaults.standard.integer(forKey: "asia")
-                     
-                     if(gameScoreAS > oldscore)
-                     {
-                         UserDefaults.standard.set(gameScoreAS, forKey: "asia")
-                     }
-                     
-                     self.resetGame()
-                 })
-             }
-             */
-            Text("Points: \(timeRemaining)")
-                .padding()
-            .font(.title2)
-            
-            
-            
-            
-            
-            
-            ForEach(0 ..< 3) { number in
-                Button(action: {
-                    self.CountryTapped(number)
-                    AudioServicesPlaySystemSound(1306)
-                }) {
-                    Text(self.CountryName[number])
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .padding()
-                        .foregroundColor(.white)
-                        .frame(width: 250, height: 50)
-                        .background(Color.gray)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.black, lineWidth: 2)
-                        )
-                        .cornerRadius(5)
-                        .padding(.bottom, 10.0)
-                        .shadow(color: .black, radius: 2, x: 0, y: 0)
                     
                 }
                 
+                
+                
             }
             
-           
-        }
+            
             
             if(StartRound)
             {
-                Text((String(Countdown))).fontWeight(.bold).foregroundColor(Color.white).font(.system(size: 250))
+                Text((String(Countdown))).fontWeight(.bold).foregroundColor(Color.white).font(.system(size: 120))
                     .opacity(isVisible ? 1 : 0.8)
-                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                    .shadow(color: .black, radius: 2, x: 0, y: 0)
                     .scaleEffect(isVisible ? 1.4 : 0.4)
                     .onAppear {
                         withAnimation(.spring(response: 1, dampingFraction: 0.1, blendDuration: 0)) {
                             self.isVisible.toggle()
                         }
                     }
-                    
-                    
+                
+                
             }
             
+            /*
+             if(showCorrect) {
+                 Text("Timeleft  +\(String(plusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.green).font(.system(size: 40)
+                                                                                                                     
+                 )
+             */
             
+            ZStack{
             if(showCorrect)
             {
-                VStack{
-                Text("+\(String(showASscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 80))
-                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                
+                    Text("+\(String(showASscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.green).font(MyFont.title50)
                     
-                }
+                
                 
             } else if(showWrong)
             {
                 
-                Text("Score  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.white).font(.system(size: 40)
-                                                                                                                    
-                )}
-        
+                Text("  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.red).font(MyFont.title50)}
+            
+            }
             
             
-            
-        }.onAppear(perform: {
+        }
+        .onAppear(perform: {
             doLang()
             StartRound.toggle()
             CountToStart()
@@ -302,8 +306,8 @@ struct AsiaQuiz: View {
         } else if gameRoundTimer < 1 {
             endroundtimeout.toggle()
         }
-        if RoundTimer >= 32 {
-           RoundTimer = 30
+        if RoundTimer >= 42 {
+           RoundTimer = 40
         }
         
     }
@@ -325,7 +329,7 @@ struct AsiaQuiz: View {
     func resetGame() {
         endOfGame = false
         gameScoreAS = 0
-        RoundTimer = 30
+        RoundTimer = 40
         askQuestion()
         timeRemaining = 300
     }

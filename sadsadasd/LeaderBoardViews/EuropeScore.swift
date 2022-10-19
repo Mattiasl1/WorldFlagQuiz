@@ -10,7 +10,7 @@ import SwiftUI
 struct EuropeScore: View {
     
     //@AppStorage("gameScoreEU") private var gameScoreEU = 0
-    
+    @AppStorage("thename") var username = ""
     @State var eupoints = UserDefaults.standard.integer(forKey: "europe")
     @State var recordText = "All time high"
     @State var partOfW = "Europe"
@@ -28,8 +28,8 @@ struct EuropeScore: View {
             
             
             VStack{
-                Text("Highscore")
-                    .font(.title)
+                Text(partOfW)
+                    .font(MyFont.title30)
                     .foregroundColor(.white)
                     .shadow(radius: 1)
                     .padding()
@@ -48,12 +48,12 @@ struct EuropeScore: View {
                
                 HStack {
                     Text(recordText)
-                        .font(.title)
+                        .font(MyFont.title18)
                         .foregroundColor(.white)
                         .shadow(radius: 1)
                     
                     Text(String(eupoints))
-                        .font(.system(size: 30))
+                        .font(.system(size: 20))
                         .foregroundColor(.white)
                         .shadow(radius: 1)
                 }.padding()
@@ -87,7 +87,7 @@ struct EuropeScore: View {
             recordText = "Best score:"
             partOfW = "Europe"
         } else {
-            recordText = "bästa score:"
+            recordText = "bästa poäng:"
             partOfW = "Europa"
         }
     }

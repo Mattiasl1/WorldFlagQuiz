@@ -32,7 +32,7 @@ struct AllQuiz: View {
     @State private var TimeToStart = 3
     let Starttimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    @State private var RoundTimer = 32
+    @State private var RoundTimer = 42
     let RoundtimerCounter = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State private var correctIndexAnswer = 0
@@ -56,7 +56,7 @@ struct AllQuiz: View {
     @State var endOfTextENG = "Total points!"
     @State var StartRound = false
     @State var isVisible = false
-    @State var gameRoundTimer : Int = 30
+    @State var gameRoundTimer : Int = 40
     @State var StartGameTimer = false
     @State var endroundtimeout = false
     @State var minusTime = -500
@@ -65,11 +65,14 @@ struct AllQuiz: View {
     @State var isNavigationBarHidden: Bool = true
     @State var animationAmount = 1.0
     
+    
     var body: some View {
+        
         ZStack{
+            
             LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-                .opacity(0.5)
+                .opacity(0.2)
             
             /*
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -80,43 +83,39 @@ struct AllQuiz: View {
                 
                 if (StartRound) {
                     Text(AllLang)
-                        .font(.title2)
-                        .fontWeight(.semibold)
+                        .font(MyFont.title18)
                         .padding(.bottom, 5)
-                    
-                        .foregroundColor(Color.white)
-                        .shadow(color: .black, radius: 4, x: 0, y: 0)
+                        .foregroundColor(Color.black)
+                        
                 }
                 
                 if(StartGameTimer) {
-                    Text("Timeleft: \(RoundTimer)")
-                        .foregroundColor(Color.white).font(.title).fontWeight(.semibold)
+                    Text("Time:  \(RoundTimer)")
+                        .foregroundColor(Color.black).font(MyFont.title18)
                   
                 }
-                    
                 
                 
+               
                 EuropeImageQuiz(imageName: CountryName[correctIndexAnswer])
                     
                 
                 
-               
+                
                 
                 //timerview()
                 HStack {
                     Text("Score:")
-                        .fontWeight(.semibold)
-                        .font(.title)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.black)
+                        .font(MyFont.title18)
                     
                     Text("\(String(gameScoreALL))")
-                        .fontWeight(.semibold)
-                        .font(.title)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.black)
+                        .font(MyFont.title18)
                 }
                 
                 
-            
+                
                 .alert(endOfGameText, isPresented: $showendOfGameAlert) {
                     Button(playAgain, role: .cancel) {
                         let oldscore = UserDefaults.standard.integer(forKey: "world")
@@ -130,53 +129,32 @@ struct AllQuiz: View {
                         self.resetGame()
                     }
                 }
-                /*
-                .alert(isPresented: $showendOfGameAlert) {
-                    
-                    Alert(title: Text(endOfGameText), message:
-                            
-                            Text("You got a total of \(gameScoreEU) points!"), dismissButton: .default(Text(playAgain)) {
-                        
-                        // Spara poäng
-                        let oldscore = UserDefaults.standard.integer(forKey: "europe")
-                        
-                        if(gameScoreEU > oldscore)
-                        {
-                            UserDefaults.standard.set(gameScoreEU, forKey: "europe")
-                            
-                        }
-                        
-                        self.resetGame()
-                    })
-                }
-                */
+                
                 
                 
                 HStack {
                     Text("Points: \(timeRemaining)")
                         .padding()
-                    .font(.title2)
-                    .foregroundColor(Color.white)
+                        .font(MyFont.title18)
                     
                     
                 }
                 
                 
                 
-             
+                
+                
+                
                 
                 
                 ForEach(0 ..< 3) { number in
                     Button(action: {
                         self.CountryTapped(number)
-                        AudioServicesPlaySystemSound(1306)
-                        
                         
                     })
                     {
                         Text(self.CountryName[number])
-                            .font(.title2)
-                            .fontWeight(.semibold)
+                            .font(MyFont.title18)
                             .padding()
                             .foregroundColor(.white)
                             .frame(width: 250, height: 50)
@@ -188,8 +166,9 @@ struct AllQuiz: View {
                             .cornerRadius(5)
                             .padding(.bottom, 10.0)
                             .shadow(color: .black, radius: 2, x: 0, y: 0)
-     
+                        
                     }
+                    
                     
                 }
                 
@@ -197,39 +176,40 @@ struct AllQuiz: View {
                 
             }
             
+            
+            
             if(StartRound)
             {
-                Text((String(Countdown))).fontWeight(.bold).foregroundColor(Color.white).font(.system(size: 250))
+                Text((String(Countdown))).fontWeight(.bold).foregroundColor(Color.white).font(.system(size: 120))
                     .opacity(isVisible ? 1 : 0.8)
-                    .shadow(color: .black, radius: 10, x: 0, y: 0)
+                    .shadow(color: .black, radius: 2, x: 0, y: 0)
                     .scaleEffect(isVisible ? 1.4 : 0.4)
                     .onAppear {
                         withAnimation(.spring(response: 1, dampingFraction: 0.1, blendDuration: 0)) {
                             self.isVisible.toggle()
                         }
                     }
-                    
-                    
+                
+                
+                
             }
             
             
             
+            ZStack{
             if(showCorrect)
             {
-                VStack{
-                Text("+\(String(showALLscore))").fontWeight(.semibold).opacity(1).foregroundColor(Color.white).font(.system(size: 60))
-                    .shadow(color: .black, radius: 2, x: 0, y: 0)
+                
+                    Text("+\(String(showALLscore))").fontWeight(.bold).opacity(1).foregroundColor(Color.green).font(MyFont.title50)
                     
-                }
+                
                 
             } else if(showWrong)
             {
                 
-                Text("Score  \(String(minusTime))").fontWeight(.semibold).opacity(1).foregroundColor(Color.white).font(.system(size: 40)
-                                                                                                                    
-                )}
-                        
+                Text("  \(String(minusTime))").fontWeight(.bold).opacity(1).foregroundColor(Color.red).font(MyFont.title50)}
             
+            }
             
             
         }
@@ -288,9 +268,6 @@ struct AllQuiz: View {
             gameScoreALL =  timeRemaining + gameScoreALL
             showALLscore = timeRemaining
             RoundTimer = RoundTimer + 1
-            
-            
-            
             showCorrect = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -307,6 +284,7 @@ struct AllQuiz: View {
             
         } else if number != correctIndexAnswer {
             gameScoreALL = gameScoreALL - 500
+            timeRemaining = timeRemaining - 20
             showWrong = true
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -324,8 +302,8 @@ struct AllQuiz: View {
         } else if gameRoundTimer < 1 {
             endroundtimeout.toggle()
         }
-        if RoundTimer >= 32 {
-           RoundTimer = 30
+        if RoundTimer >= 42 {
+           RoundTimer = 40
         }
         
     }
@@ -347,7 +325,7 @@ struct AllQuiz: View {
     func resetGame() {
         endOfGame = false
         gameScoreALL = 0
-        RoundTimer = 30
+        RoundTimer = 40
         askQuestion()
         timeRemaining = 300
     }

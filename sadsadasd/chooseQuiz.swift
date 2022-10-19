@@ -36,7 +36,7 @@ struct chooseQuiz: View {
             
             LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-                .opacity(0.5)
+                .opacity(0.2)
             
             /*
             LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)

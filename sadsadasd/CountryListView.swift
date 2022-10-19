@@ -69,7 +69,7 @@ struct CountryListView: View {
                 doLang()
                 
         })
-        }
+        }.navigationBarTitleDisplayMode(.inline)
         
         
                 

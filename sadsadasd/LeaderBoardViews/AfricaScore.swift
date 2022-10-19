@@ -12,30 +12,47 @@ struct AfricaScore: View {
     
     @State var recordText = "All time high"
     @State var partOfW = "Europe"
+    @State var lista = ["hej", "hej2", "hej3"]
     
     var body: some View {
         ZStack{
+            
             LinearGradient(gradient: Gradient(colors: [.brown, .brown, .brown]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
                 .opacity(0.5)
             
-           // LinearGradient(gradient: Gradient(colors: [.black, .blue, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing)
-             //   .edgesIgnoringSafeArea(.all)
-            
             
             VStack{
+                Text(partOfW)
+                    .font(MyFont.title30)
+                    .foregroundColor(.white)
+                    .shadow(radius: 1)
+                    .padding()
+                List(lista, id: \.self) { list in
+                    HStack{
+                        
+                        Text("Usernamehere")
+                        Spacer()
+                        Text("Points: " + "70")
+                        
+                            
+                        
+                        
+                    }.scaledToFit()
+                }
                
                 HStack {
                     Text(recordText)
-                        .font(.title)
+                        .font(MyFont.title18)
                         .foregroundColor(.white)
-                    .shadow(radius: 1)
+                        .shadow(radius: 1)
                     
                     Text(String(africapoints))
-                        .font(.system(size: 30))
+                        .font(.system(size: 20))
                         .foregroundColor(.white)
-                        .shadow(radius: 10)
-                }
+                        .shadow(radius: 1)
+                }.padding()
+                
                     
             }
             
@@ -56,10 +73,10 @@ struct AfricaScore: View {
         
         if(lang == "en")
         {
-            recordText = "All time high"
+            recordText = "Best score:"
             partOfW = "Africa"
         } else {
-            recordText = "Bästa score"
+            recordText = "Bästa score:"
             partOfW = "Afrika"
         }
     }

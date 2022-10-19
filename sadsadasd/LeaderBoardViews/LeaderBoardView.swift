@@ -23,11 +23,12 @@ struct LeaderBoardView: View {
             
             
         TabView {
+            AllworldScore()
             EuropeScore()
             AsiaScore()
             AfricaScore()
             AmericaScore()
-            AllworldScore()
+            
                 }
         
         .tabViewStyle(.page(indexDisplayMode: .automatic))

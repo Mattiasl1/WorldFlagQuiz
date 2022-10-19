@@ -16,7 +16,10 @@ struct sadsadasdApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            AltHomescreen()
+       
+            //ContentView()
+           // loginView()
+            HomeView()
         }
     }
 }
